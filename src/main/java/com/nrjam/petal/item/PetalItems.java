@@ -5,7 +5,6 @@ import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.component.PetalConsumableComponent;
 import com.nrjam.petal.item.component.PetalFoodComponent;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
