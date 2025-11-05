@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"package": "com.nrjam.petal.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"CropBlockMixin",
+		"StemBlockMixin",
+		"PlantBlockMixin",
+		"PitcherCropBlockMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

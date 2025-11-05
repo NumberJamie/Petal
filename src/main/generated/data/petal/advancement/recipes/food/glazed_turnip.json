@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_roasted_turnip": {
+      "conditions": {
+        "items": [
+          {
+            "items": "petal:roasted_turnip"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "petal:glazed_turnip"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_roasted_turnip"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "petal:glazed_turnip"
+    ]
+  }
+}

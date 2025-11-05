@@ -1,0 +1,26 @@
+package com.nrjam.petal.datagen;
+
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.registry.RegistryWrapper;
+
+import java.util.concurrent.CompletableFuture;
+
+public class PetalEnglishLangProvider extends FabricLanguageProvider {
+    public PetalEnglishLangProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, "en_us", registryLookup);
+    }
+
+    @Override
+    public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+        translationBuilder.add("item.petal.muddy_farmland", "Muddy Farmland");
+
+        translationBuilder.add("item.petal.turnip", "Turnip");
+        translationBuilder.add("item.petal.roasted_turnip", "Roasted Turnip");
+        translationBuilder.add("item.petal.glazed_turnip", "Glazed Turnip");
+        translationBuilder.add("item.petal.turnip_pie", "Turnip Pie");
+
+        translationBuilder.add("item.petal.fugu", "Fugu");
+        translationBuilder.add("item.petal.mousse", "Mousse");
+    }
+}

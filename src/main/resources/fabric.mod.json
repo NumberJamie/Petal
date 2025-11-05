@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "petal",
+	"version": "${version}",
+	"name": "Petal",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"NrJam"
+	],
+	"contact": {
+		"homepage": "https://github.com/NumberJamie/Petal",
+		"sources": "https://github.com/NumberJamie/Petal"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/petal/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.nrjam.petal.Petal"
+		],
+		"client": [
+			"com.nrjam.petal.PetalClient"
+		],
+		"fabric-datagen": [
+			"com.nrjam.petal.PetalDataGenerator"
+		]
+	},
+	"mixins": [
+		"petal.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.17.2",
+		"minecraft": "~1.21.8",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

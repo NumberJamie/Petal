@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#minecraft:eggs",
+    "petal:turnip",
+    "minecraft:sugar"
+  ],
+  "result": {
+    "count": 1,
+    "id": "petal:turnip_pie"
+  }
+}

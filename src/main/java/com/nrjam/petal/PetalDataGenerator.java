@@ -1,0 +1,18 @@
+package com.nrjam.petal;
+
+import com.nrjam.petal.datagen.*;
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+
+public class PetalDataGenerator implements DataGeneratorEntrypoint {
+	@Override
+	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+
+		pack.addProvider(PetalEnglishLangProvider::new);
+		pack.addProvider(PetalLootTableProvider::new);
+		pack.addProvider(PetalModelProvider::new);
+		pack.addProvider(PetalRecipeProvider::new);
+		pack.addProvider(PetalBlockTagProvider::new);
+	}
+}
