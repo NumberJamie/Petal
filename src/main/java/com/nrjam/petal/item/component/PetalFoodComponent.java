@@ -8,6 +8,8 @@ public class PetalFoodComponent {
     public static final FoodComponent GLAZED_TURNIP = new FoodComponent.Builder().nutrition(6).saturationModifier(.5f).build();
     public static final FoodComponent TURNIP_PIE = new FoodComponent.Builder().nutrition(6).saturationModifier(.75f).build();
 
+    public static final FoodComponent LAVA_FRUIT = new FoodComponent.Builder().nutrition(2).saturationModifier(.5f).build();
+
     public static final FoodComponent FUGU = new FoodComponent.Builder().nutrition(6).saturationModifier(1f).build();
     public static final FoodComponent MOUSSE = new FoodComponent.Builder().nutrition(6).saturationModifier(.75f).build();
 }

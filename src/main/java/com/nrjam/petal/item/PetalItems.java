@@ -22,6 +22,7 @@ public class PetalItems {
             itemGroup.add(ROASTED_TURNIP);
             itemGroup.add(GLAZED_TURNIP);
             itemGroup.add(TURNIP_PIE);
+            itemGroup.add(LAVA_FRUIT);
             itemGroup.add(FUGU);
             itemGroup.add(MOUSSE);
         });
@@ -32,6 +33,7 @@ public class PetalItems {
     public static final Item GLAZED_TURNIP = register("glazed_turnip", settings -> new Item(settings.food(PetalFoodComponent.GLAZED_TURNIP)));
     public static final Item TURNIP_PIE = register("turnip_pie", settings -> new Item(settings.food(PetalFoodComponent.TURNIP_PIE)));
 
+    public static final Item LAVA_FRUIT = register("lava_fruit", settings -> new Item(settings.food(PetalFoodComponent.LAVA_FRUIT, PetalConsumableComponent.LAVA_FRUIT)));
 
     public static final Item FUGU = register("fugu", settings -> new Item(settings.food(PetalFoodComponent.FUGU, PetalConsumableComponent.FUGU)));
     public static final Item MOUSSE = register("mousse", settings -> new Item(settings.food(PetalFoodComponent.MOUSSE)));
