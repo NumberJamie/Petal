@@ -13,6 +13,8 @@ public class PetalEnglishLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+        translationBuilder.add("item.petal.lava_root", "Lava Root");
+
         translationBuilder.add("item.petal.muddy_farmland", "Muddy Farmland");
 
         translationBuilder.add("item.petal.turnip", "Turnip");
