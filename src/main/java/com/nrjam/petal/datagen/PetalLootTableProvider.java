@@ -14,6 +14,7 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.predicate.StatePredicate;
@@ -34,9 +35,17 @@ public class PetalLootTableProvider extends FabricBlockLootTableProvider {
         LootCondition.Builder builder = BlockStatePropertyLootCondition.builder(PetalBlocks.TURNIPS)
                 .properties(StatePredicate.Builder.create().exactMatch(TurnipsBlock.AGE, TurnipsBlock.MAX_AGE));
 
+        addDrop(PetalBlocks.MAGMA_BLOOM, dropsWithSilkTouchOrShears(PetalBlocks.MAGMA_BLOOM));
+        addDrop(PetalBlocks.DEAD_ROOTS, dropsWithSilkTouchOrShears(PetalBlocks.DEAD_ROOTS));
+        addDrop(PetalBlocks.LAVA_ROOT, dropsWithSilkTouchOrShears(PetalBlocks.LAVA_ROOT, applyExplosionDecay(
+                PetalBlocks.LAVA_ROOT, ItemEntry.builder(PetalItems.LAVA_FRUIT)
+                        .conditionally(RandomChanceLootCondition.builder(0.125f))
+                        .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
+        )));
+
         addDrop(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
         addDrop(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.builder()
                                 .pool(LootPool.builder().with(ItemEntry.builder(PetalItems.TURNIP)))
-                                .pool(LootPool.builder().conditionally(builder).with(ItemEntry.builder(PetalItems.TURNIP).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.5714286f, 1))))));
+                                .pool(LootPool.builder().conditionally(builder).with(ItemEntry.builder(PetalItems.TURNIP).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
     }
 }

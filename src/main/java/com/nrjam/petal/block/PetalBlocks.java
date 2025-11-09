@@ -1,8 +1,8 @@
 package com.nrjam.petal.block;
 
 import com.nrjam.petal.Petal;
-import com.nrjam.petal.block.crop.TurnipsBlock;
-import com.nrjam.petal.block.custom.MuddyFarmland;
+import com.nrjam.petal.block.crop.*;
+import com.nrjam.petal.block.custom.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.minecraft.block.*;
@@ -21,16 +21,21 @@ import java.util.function.Function;
 public class PetalBlocks {
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register((itemGroup) -> {
+            itemGroup.add(DEAD_ROOTS.asItem());
             itemGroup.add(LAVA_ROOT.asItem());
+            itemGroup.add(MAGMA_BLOOM.asItem());
             itemGroup.add(MUDDY_FARMLAND.asItem());
         });
 
         TillableBlockRegistry.register(Blocks.MUD, ctx -> true, PetalBlocks.MUDDY_FARMLAND.getDefaultState());
     }
 
+    public static final Block DEAD_ROOTS = register("dead_roots", DeadRoots::new, AbstractBlock.Settings.copy(Blocks.NETHER_SPROUTS), true);
+    public static final Block LAVA_ROOT = register("lava_root", LavaRoot::new, AbstractBlock.Settings.copy(Blocks.NETHER_SPROUTS), true);
+    public static final Block MAGMA_BLOOM = register("magma_bloom", MagmaBloom::new, AbstractBlock.Settings.copy(Blocks.NETHER_SPROUTS), true);
+
     public static final Block MUDDY_FARMLAND = register("muddy_farmland", MuddyFarmland::new, AbstractBlock.Settings.copy(Blocks.FARMLAND), true);
     public static final Block TURNIPS = register("turnips", TurnipsBlock::new, AbstractBlock.Settings.copy(Blocks.POTATOES), false);
-    public static final Block LAVA_ROOT = register("lava_root", SproutsBlock::new, AbstractBlock.Settings.copy(Blocks.NETHER_SPROUTS), true);
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean registerItem) {
         RegistryKey<Block> blockKey = keyOfBlock(name);

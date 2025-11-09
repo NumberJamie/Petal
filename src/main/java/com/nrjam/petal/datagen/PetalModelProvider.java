@@ -21,8 +21,12 @@ public class PetalModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
+        generator.registerTintableCrossBlockState(PetalBlocks.DEAD_ROOTS, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerItemModel(PetalBlocks.DEAD_ROOTS);
         generator.registerTintableCrossBlockState(PetalBlocks.LAVA_ROOT, BlockStateModelGenerator.CrossType.NOT_TINTED);
         generator.registerItemModel(PetalBlocks.LAVA_ROOT);
+        generator.registerTintableCrossBlockState(PetalBlocks.MAGMA_BLOOM, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerItemModel(PetalBlocks.MAGMA_BLOOM);
 
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
         generator.registerCrop(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);
