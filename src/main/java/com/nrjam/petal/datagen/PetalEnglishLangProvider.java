@@ -26,6 +26,7 @@ public class PetalEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.petal.turnip_pie", "Turnip Pie");
 
         translationBuilder.add("item.petal.lava_fruit", "Lava Fruit");
+        translationBuilder.add("item.petal.baked_lava_fruit", "Baked Lava Fruit");
 
         translationBuilder.add("item.petal.fugu", "Fugu");
         translationBuilder.add("item.petal.mousse", "Mousse");

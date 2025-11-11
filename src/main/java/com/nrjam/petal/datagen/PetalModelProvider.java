@@ -40,6 +40,7 @@ public class PetalModelProvider extends FabricModelProvider {
         generator.register(PetalItems.TURNIP_PIE, Models.GENERATED);
 
         generator.register(PetalItems.LAVA_FRUIT, Models.GENERATED);
+        generator.register(PetalItems.BAKED_LAVA_FRUIT, Models.GENERATED);
 
         generator.register(PetalItems.FUGU, Models.GENERATED);
         generator.register(PetalItems.MOUSSE, Models.GENERATED);
