@@ -44,6 +44,7 @@ public class PetalLootTableProvider extends FabricBlockLootTableProvider {
         )));
 
         addDrop(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
+        addDrop(PetalBlocks.NETHER_FARMLAND, Blocks.SOUL_SOIL);
         addDrop(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.builder()
                                 .pool(LootPool.builder().with(ItemEntry.builder(PetalItems.TURNIP)))
                                 .pool(LootPool.builder().conditionally(builder).with(ItemEntry.builder(PetalItems.TURNIP).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));

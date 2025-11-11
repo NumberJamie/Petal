@@ -22,7 +22,7 @@ public class MuddyFarmland extends FarmlandBlock {
 
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!state.canPlaceAt(world, pos)) {
-            setToMud((Entity)null, state, world, pos);
+            setToMud(null, state, world, pos);
         }
     }
 
@@ -40,15 +40,15 @@ public class MuddyFarmland extends FarmlandBlock {
     }
 
     protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int i = (Integer)state.get(MOISTURE);
+        int i = state.get(MOISTURE);
         if (!isWaterNearby(world, pos) && !world.hasRain(pos.up())) {
             if (i > 0) {
-                world.setBlockState(pos, (BlockState)state.with(MOISTURE, i - 1), 2);
+                world.setBlockState(pos, state.with(MOISTURE, i - 1), 2);
             } else if (!hasCrop(world, pos)) {
-                setToMud((Entity)null, state, world, pos);
+                setToMud(null, state, world, pos);
             }
         } else if (i < 7) {
-            world.setBlockState(pos, (BlockState)state.with(MOISTURE, 7), 2);
+            world.setBlockState(pos, state.with(MOISTURE, 7), 2);
         }
     }
 

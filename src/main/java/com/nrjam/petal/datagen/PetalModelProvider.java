@@ -29,6 +29,7 @@ public class PetalModelProvider extends FabricModelProvider {
         generator.registerItemModel(PetalBlocks.MAGMA_BLOOM);
 
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
+        registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);
         generator.registerCrop(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);
     }
 

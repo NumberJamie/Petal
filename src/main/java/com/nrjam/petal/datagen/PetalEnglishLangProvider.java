@@ -18,6 +18,7 @@ public class PetalEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.petal.magma_bloom", "Magma Bloom");
 
         translationBuilder.add("item.petal.muddy_farmland", "Muddy Farmland");
+        translationBuilder.add("item.petal.nether_farmland", "Nether Farmland");
 
         translationBuilder.add("item.petal.turnip", "Turnip");
         translationBuilder.add("item.petal.roasted_turnip", "Roasted Turnip");
