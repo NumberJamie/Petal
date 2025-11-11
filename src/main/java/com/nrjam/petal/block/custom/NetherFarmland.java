@@ -29,7 +29,7 @@ public class NetherFarmland extends FarmlandBlock {
     @Overwrite
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!state.canPlaceAt(world, pos)) {
-            setToSoulSand(null, state, world, pos);
+            setToSoil(null, state, world, pos);
         }
     }
 
@@ -63,14 +63,14 @@ public class NetherFarmland extends FarmlandBlock {
             if (i > 0) {
                 world.setBlockState(pos, state.with(MOISTURE, i - 1), 2);
             } else if (!hasCrop(world, pos)) {
-                setToSoulSand(null, state, world, pos);
+                setToSoil(null, state, world, pos);
             }
         } else if (i < 7 && world.getDimension().ultrawarm()) {
             world.setBlockState(pos, state.with(MOISTURE, 7), 2);
         }
     }
 
-    public static void setToSoulSand(@Nullable Entity entity, BlockState state, World world, BlockPos pos) {
+    public static void setToSoil(@Nullable Entity entity, BlockState state, World world, BlockPos pos) {
         BlockState blockState = pushEntitiesUpBeforeBlockChange(state, Blocks.SOUL_SOIL.getDefaultState(), world, pos);
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(entity, blockState));
@@ -83,8 +83,8 @@ public class NetherFarmland extends FarmlandBlock {
                 && entity instanceof LivingEntity
                 && (entity instanceof PlayerEntity || serverWorld.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING))
                 && entity.getWidth() * entity.getWidth() * entity.getHeight() > 0.512F) {
-            setToSoulSand(entity, state, world, pos);
+            setToSoil(entity, state, world, pos);
         }
-        super.onLandedUpon(world, state, pos, entity, fallDistance);
+        entity.handleFallDamage(fallDistance, 1.0F, entity.getDamageSources().fall());
     }
 }
