@@ -44,6 +44,7 @@ public class PetalRecipeProvider extends FabricRecipeProvider {
                         .criterion(hasItem(PetalItems.ROASTED_TURNIP), conditionsFromItem(PetalItems.ROASTED_TURNIP))
                         .offerTo(exporter);
                 offerSmelting(List.of(PetalItems.TURNIP), RecipeCategory.FOOD, PetalItems.ROASTED_TURNIP, .25f, 200, "roasted_turnip");
+                offerSmelting(List.of(PetalItems.LAVA_FRUIT), RecipeCategory.FOOD, PetalItems.BAKED_LAVA_FRUIT, .25f, 200, "baked_lava_fruit");
             }
         };
     }

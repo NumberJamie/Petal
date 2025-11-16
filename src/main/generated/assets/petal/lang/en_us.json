@@ -1,8 +1,15 @@
 {
+  "item.petal.baked_lava_fruit": "Baked Lava Fruit",
+  "item.petal.dead_roots": "Dead Roots",
   "item.petal.fugu": "Fugu",
   "item.petal.glazed_turnip": "Glazed Turnip",
+  "item.petal.lava_fruit": "Lava Fruit",
+  "item.petal.lava_root": "Lava Root",
+  "item.petal.magma_berry": "Magma Berry",
+  "item.petal.magma_bloom": "Magma Bloom",
   "item.petal.mousse": "Mousse",
   "item.petal.muddy_farmland": "Muddy Farmland",
+  "item.petal.nether_farmland": "Nether Farmland",
   "item.petal.roasted_turnip": "Roasted Turnip",
   "item.petal.turnip": "Turnip",
   "item.petal.turnip_pie": "Turnip Pie"

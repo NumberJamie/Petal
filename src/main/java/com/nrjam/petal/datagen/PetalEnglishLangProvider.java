@@ -13,12 +13,21 @@ public class PetalEnglishLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+        translationBuilder.add("item.petal.dead_roots", "Dead Roots");
+        translationBuilder.add("item.petal.lava_root", "Lava Root");
+        translationBuilder.add("item.petal.magma_bloom", "Magma Bloom");
+
         translationBuilder.add("item.petal.muddy_farmland", "Muddy Farmland");
+        translationBuilder.add("item.petal.nether_farmland", "Nether Farmland");
 
         translationBuilder.add("item.petal.turnip", "Turnip");
         translationBuilder.add("item.petal.roasted_turnip", "Roasted Turnip");
         translationBuilder.add("item.petal.glazed_turnip", "Glazed Turnip");
         translationBuilder.add("item.petal.turnip_pie", "Turnip Pie");
+
+        translationBuilder.add("item.petal.lava_fruit", "Lava Fruit");
+        translationBuilder.add("item.petal.baked_lava_fruit", "Baked Lava Fruit");
+        translationBuilder.add("item.petal.magma_berry", "Magma Berry");
 
         translationBuilder.add("item.petal.fugu", "Fugu");
         translationBuilder.add("item.petal.mousse", "Mousse");

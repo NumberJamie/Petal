@@ -1,6 +1,7 @@
 package com.nrjam.petal.datagen;
 
 import com.nrjam.petal.block.PetalBlocks;
+import com.nrjam.petal.block.crop.MagmaBerriesBlock;
 import com.nrjam.petal.block.crop.TurnipsBlock;
 import com.nrjam.petal.item.PetalItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
@@ -21,18 +22,30 @@ public class PetalModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
+        generator.registerTintableCrossBlockState(PetalBlocks.DEAD_ROOTS, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerItemModel(PetalBlocks.DEAD_ROOTS);
+        generator.registerTintableCrossBlockState(PetalBlocks.LAVA_ROOT, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerItemModel(PetalBlocks.LAVA_ROOT);
+        generator.registerTintableCrossBlockState(PetalBlocks.MAGMA_BLOOM, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerItemModel(PetalBlocks.MAGMA_BLOOM);
+
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
+        registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);
         generator.registerCrop(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);
+        generator.registerCrop(PetalBlocks.MAGMA_BERRIES, MagmaBerriesBlock.AGE, 0, 1, 2, 3);
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(PetalItems.ROASTED_TURNIP, Models.GENERATED);
-        itemModelGenerator.register(PetalItems.GLAZED_TURNIP, Models.GENERATED);
-        itemModelGenerator.register(PetalItems.TURNIP_PIE, Models.GENERATED);
+    public void generateItemModels(ItemModelGenerator generator) {
+        generator.register(PetalItems.ROASTED_TURNIP, Models.GENERATED);
+        generator.register(PetalItems.GLAZED_TURNIP, Models.GENERATED);
+        generator.register(PetalItems.TURNIP_PIE, Models.GENERATED);
 
-        itemModelGenerator.register(PetalItems.FUGU, Models.GENERATED);
-        itemModelGenerator.register(PetalItems.MOUSSE, Models.GENERATED);
+        generator.register(PetalItems.LAVA_FRUIT, Models.GENERATED);
+        generator.register(PetalItems.BAKED_LAVA_FRUIT, Models.GENERATED);
+
+        generator.register(PetalItems.FUGU, Models.GENERATED);
+        generator.register(PetalItems.MOUSSE, Models.GENERATED);
     }
 
     private void registerFarmland(Block sideBlock, Block farmland, BlockStateModelGenerator generator) {

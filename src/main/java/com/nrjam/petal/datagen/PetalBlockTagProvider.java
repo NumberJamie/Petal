@@ -16,12 +16,17 @@ public class PetalBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         valueLookupBuilder(BlockTags.SHOVEL_MINEABLE)
-                .add(PetalBlocks.MUDDY_FARMLAND);
+                .add(PetalBlocks.MUDDY_FARMLAND)
+                .add(PetalBlocks.NETHER_FARMLAND);
 
         valueLookupBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON)
                 .add(PetalBlocks.MUDDY_FARMLAND);
 
         valueLookupBuilder(BlockTags.BIG_DRIPLEAF_PLACEABLE)
-                .add(PetalBlocks.MUDDY_FARMLAND);
+                .add(PetalBlocks.MUDDY_FARMLAND)
+                .add(PetalBlocks.NETHER_FARMLAND);
+
+        valueLookupBuilder(BlockTags.MAINTAINS_FARMLAND)
+                .add(PetalBlocks.TURNIPS);
     }
 }
