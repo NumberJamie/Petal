@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "petal:block/magma_berries_stage3"
+  }
+}

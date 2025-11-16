@@ -24,6 +24,7 @@ public class PetalItems {
             itemGroup.add(TURNIP_PIE);
             itemGroup.add(LAVA_FRUIT);
             itemGroup.add(BAKED_LAVA_FRUIT);
+            itemGroup.add(MAGMA_BERRY);
             itemGroup.add(FUGU);
             itemGroup.add(MOUSSE);
         });
@@ -36,6 +37,7 @@ public class PetalItems {
 
     public static final Item LAVA_FRUIT = register("lava_fruit", settings -> new Item(settings.food(PetalFoodComponent.LAVA_FRUIT, PetalConsumableComponent.LAVA_FRUIT)));
     public static final Item BAKED_LAVA_FRUIT = register("baked_lava_fruit", settings -> new Item(settings.food(PetalFoodComponent.LAVA_FRUIT, PetalConsumableComponent.BAKED_LAVA_FRUIT)));
+    public static final Item MAGMA_BERRY = register("magma_berry", settings -> new BlockItem(PetalBlocks.MAGMA_BERRIES, settings.food(PetalFoodComponent.MAGMA_BERRY, PetalConsumableComponent.MAGMA_BERRY)));
 
     public static final Item FUGU = register("fugu", settings -> new Item(settings.food(PetalFoodComponent.FUGU, PetalConsumableComponent.FUGU)));
     public static final Item MOUSSE = register("mousse", settings -> new Item(settings.food(PetalFoodComponent.MOUSSE)));

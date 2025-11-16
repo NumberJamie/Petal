@@ -1,6 +1,7 @@
 package com.nrjam.petal.datagen;
 
 import com.nrjam.petal.block.PetalBlocks;
+import com.nrjam.petal.block.crop.MagmaBerriesBlock;
 import com.nrjam.petal.block.crop.TurnipsBlock;
 import com.nrjam.petal.item.PetalItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -34,8 +35,14 @@ public class PetalLootTableProvider extends FabricBlockLootTableProvider {
 
         LootCondition.Builder builder = BlockStatePropertyLootCondition.builder(PetalBlocks.TURNIPS)
                 .properties(StatePredicate.Builder.create().exactMatch(TurnipsBlock.AGE, TurnipsBlock.MAX_AGE));
+        LootCondition.Builder builder2 = BlockStatePropertyLootCondition.builder(PetalBlocks.MAGMA_BERRIES)
+                .properties(StatePredicate.Builder.create().exactMatch(MagmaBerriesBlock.AGE, MagmaBerriesBlock.MAX_AGE));
 
-        addDrop(PetalBlocks.MAGMA_BLOOM, dropsWithSilkTouchOrShears(PetalBlocks.MAGMA_BLOOM));
+        addDrop(PetalBlocks.MAGMA_BLOOM, dropsWithSilkTouchOrShears(PetalBlocks.MAGMA_BLOOM, applyExplosionDecay(
+                PetalBlocks.MAGMA_BLOOM, ItemEntry.builder(PetalItems.MAGMA_BERRY)
+                        .conditionally(RandomChanceLootCondition.builder(0.125f))
+                        .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
+        )));
         addDrop(PetalBlocks.DEAD_ROOTS, dropsWithSilkTouchOrShears(PetalBlocks.DEAD_ROOTS));
         addDrop(PetalBlocks.LAVA_ROOT, dropsWithSilkTouchOrShears(PetalBlocks.LAVA_ROOT, applyExplosionDecay(
                 PetalBlocks.LAVA_ROOT, ItemEntry.builder(PetalItems.LAVA_FRUIT)
@@ -48,5 +55,8 @@ public class PetalLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.builder()
                                 .pool(LootPool.builder().with(ItemEntry.builder(PetalItems.TURNIP)))
                                 .pool(LootPool.builder().conditionally(builder).with(ItemEntry.builder(PetalItems.TURNIP).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
+        addDrop(PetalBlocks.MAGMA_BERRIES, applyExplosionDecay(PetalBlocks.MAGMA_BERRIES, LootTable.builder()
+                .pool(LootPool.builder().with(ItemEntry.builder(PetalItems.MAGMA_BERRY)))
+                .pool(LootPool.builder().conditionally(builder2).with(ItemEntry.builder(PetalItems.MAGMA_BERRY).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
     }
 }

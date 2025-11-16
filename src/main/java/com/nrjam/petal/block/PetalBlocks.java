@@ -39,6 +39,8 @@ public class PetalBlocks {
     public static final Block LAVA_ROOT = register("lava_root", LavaRoot::new, AbstractBlock.Settings.copy(Blocks.NETHER_SPROUTS), true);
     public static final Block MAGMA_BLOOM = register("magma_bloom", MagmaBloom::new, AbstractBlock.Settings.copy(Blocks.NETHER_SPROUTS).luminance(state -> 3), true);
 
+    public static final Block MAGMA_BERRIES = register("magma_berries", MagmaBerriesBlock::new, AbstractBlock.Settings.copy(Blocks.POTATOES), false);
+
     public static final Block TURNIPS = register("turnips", TurnipsBlock::new, AbstractBlock.Settings.copy(Blocks.POTATOES), false);
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean registerItem) {

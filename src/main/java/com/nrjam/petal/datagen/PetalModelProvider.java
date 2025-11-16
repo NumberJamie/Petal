@@ -1,6 +1,7 @@
 package com.nrjam.petal.datagen;
 
 import com.nrjam.petal.block.PetalBlocks;
+import com.nrjam.petal.block.crop.MagmaBerriesBlock;
 import com.nrjam.petal.block.crop.TurnipsBlock;
 import com.nrjam.petal.item.PetalItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
@@ -31,6 +32,7 @@ public class PetalModelProvider extends FabricModelProvider {
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
         registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);
         generator.registerCrop(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);
+        generator.registerCrop(PetalBlocks.MAGMA_BERRIES, MagmaBerriesBlock.AGE, 0, 1, 2, 3);
     }
 
     @Override
