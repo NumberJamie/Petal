@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "petal:block/huge_turnip_bottom",
+    "side": "petal:block/huge_turnip_side",
+    "top": "petal:block/huge_turnip_top"
+  }
+}

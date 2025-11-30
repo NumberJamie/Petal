@@ -28,6 +28,7 @@ public class PetalModelProvider extends FabricModelProvider {
         generator.registerItemModel(PetalBlocks.LAVA_ROOT);
         generator.registerTintableCrossBlockState(PetalBlocks.MAGMA_BLOOM, BlockStateModelGenerator.CrossType.NOT_TINTED);
         generator.registerItemModel(PetalBlocks.MAGMA_BLOOM);
+        generator.registerSingleton(PetalBlocks.HUGE_TURNIP, TexturedModel.CUBE_BOTTOM_TOP);
 
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
         registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);

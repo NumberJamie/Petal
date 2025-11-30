@@ -19,6 +19,9 @@ public class PetalBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(PetalBlocks.MUDDY_FARMLAND)
                 .add(PetalBlocks.NETHER_FARMLAND);
 
+        valueLookupBuilder(BlockTags.AXE_MINEABLE)
+                .add(PetalBlocks.HUGE_TURNIP);
+
         valueLookupBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON)
                 .add(PetalBlocks.MUDDY_FARMLAND);
 

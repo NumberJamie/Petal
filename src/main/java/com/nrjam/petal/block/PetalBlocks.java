@@ -21,6 +21,7 @@ import java.util.function.Function;
 public class PetalBlocks {
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register((itemGroup) -> {
+            itemGroup.add(HUGE_TURNIP.asItem());
             itemGroup.add(MUDDY_FARMLAND.asItem());
             itemGroup.add(NETHER_FARMLAND.asItem());
             itemGroup.add(DEAD_ROOTS.asItem());
@@ -42,6 +43,8 @@ public class PetalBlocks {
     public static final Block MAGMA_BERRIES = register("magma_berries", MagmaBerriesBlock::new, AbstractBlock.Settings.copy(Blocks.POTATOES), false);
 
     public static final Block TURNIPS = register("turnips", TurnipsBlock::new, AbstractBlock.Settings.copy(Blocks.POTATOES), false);
+
+    public static final Block HUGE_TURNIP = register("huge_turnip", Block::new, AbstractBlock.Settings.copy(Blocks.MELON), true);
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean registerItem) {
         RegistryKey<Block> blockKey = keyOfBlock(name);

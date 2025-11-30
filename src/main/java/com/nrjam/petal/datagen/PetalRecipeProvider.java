@@ -1,5 +1,6 @@
 package com.nrjam.petal.datagen;
 
+import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.PetalItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -7,6 +8,7 @@ import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
@@ -27,6 +29,7 @@ public class PetalRecipeProvider extends FabricRecipeProvider {
             public void generate() {
                 RegistryWrapper.Impl<Item> itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
 
+                createCondensingRecipe(RecipeCategory.FOOD, PetalBlocks.HUGE_TURNIP, Ingredient.ofItem(PetalItems.TURNIP));
                 createShapeless(RecipeCategory.FOOD, PetalItems.FUGU)
                         .input(Items.PUFFERFISH)
                         .criterion(hasItem(Items.PUFFERFISH), conditionsFromItem(Items.PUFFERFISH))

@@ -1,10 +1,8 @@
 package com.nrjam.petal.block.crop;
 
+import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.PetalItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CropBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -43,7 +41,11 @@ public class TurnipsBlock extends CropBlock {
     @Override
     protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (random.nextInt(3) != 0) {
-            super.randomTick(state, world, pos, random);
+            if (this.getAge(state) + 1 >= MAX_AGE && random.nextInt(256) == 0) {
+                world.setBlockState(pos, PetalBlocks.HUGE_TURNIP.getDefaultState(), Block.NOTIFY_LISTENERS);
+            } else {
+                super.randomTick(state, world, pos, random);
+            }
         }
     }
 

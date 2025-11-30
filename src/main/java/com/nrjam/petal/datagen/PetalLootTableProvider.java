@@ -17,7 +17,12 @@ import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
+import net.minecraft.loot.function.LimitCountLootFunction;
+import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.operator.BoundedIntUnaryOperator;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
@@ -48,6 +53,12 @@ public class PetalLootTableProvider extends FabricBlockLootTableProvider {
                 PetalBlocks.LAVA_ROOT, ItemEntry.builder(PetalItems.LAVA_FRUIT)
                         .conditionally(RandomChanceLootCondition.builder(0.125f))
                         .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
+        )));
+        addDrop(PetalBlocks.HUGE_TURNIP, dropsWithSilkTouch(PetalBlocks.HUGE_TURNIP, applyExplosionDecay(
+                PetalBlocks.HUGE_TURNIP, ItemEntry.builder(PetalItems.TURNIP)
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(3.0F, 7.0F)))
+                        .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE)))
+                        .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMax(9)))
         )));
 
         addDrop(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
