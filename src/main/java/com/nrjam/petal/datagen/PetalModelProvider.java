@@ -33,7 +33,7 @@ public class PetalModelProvider extends FabricModelProvider {
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
         registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);
         generator.registerCrop(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);
-        generator.registerCrop(PetalBlocks.MAGMA_BERRIES, MagmaBerriesBlock.AGE, 0, 1, 2, 3);
+        generator.registerTintableCrossBlockStateWithStages(PetalBlocks.MAGMA_BERRIES, BlockStateModelGenerator.CrossType.TINTED, MagmaBerriesBlock.AGE, 0, 1, 2, 3);
     }
 
     @Override

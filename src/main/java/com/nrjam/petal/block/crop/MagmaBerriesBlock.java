@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class MagmaBerriesBlock extends CropBlock {
     public static final int MAX_AGE = 3;
     public static final IntProperty AGE = Properties.AGE_3;
-    private static final VoxelShape[] SHAPES_BY_AGE = Block.createShapeArray(7, age -> Block.createColumnShape(16.0, 0.0, 2 + age * 2.5));
+    private static final VoxelShape[] SHAPES_BY_AGE = Block.createShapeArray(7, age -> Block.createColumnShape(16.0, 0.0, 2 + age));
 
     public MagmaBerriesBlock(AbstractBlock.Settings settings) {
         super(settings);

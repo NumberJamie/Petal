@@ -68,6 +68,7 @@ public class PetalLootTableProvider extends FabricBlockLootTableProvider {
                                 .pool(LootPool.builder().conditionally(builder).with(ItemEntry.builder(PetalItems.TURNIP).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
         addDrop(PetalBlocks.MAGMA_BERRIES, applyExplosionDecay(PetalBlocks.MAGMA_BERRIES, LootTable.builder()
                 .pool(LootPool.builder().with(ItemEntry.builder(PetalItems.MAGMA_BERRY)))
+                .pool(LootPool.builder().with(ItemEntry.builder(PetalBlocks.MAGMA_BLOOM)).conditionally(RandomChanceLootCondition.builder(0.2F)))
                 .pool(LootPool.builder().conditionally(builder2).with(ItemEntry.builder(PetalItems.MAGMA_BERRY).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
     }
 }

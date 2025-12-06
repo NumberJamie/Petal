@@ -20,6 +20,22 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
+          "chance": 0.2,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "petal:magma_bloom"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
           "block": "petal:magma_berries",
           "condition": "minecraft:block_state_property",
           "properties": {
