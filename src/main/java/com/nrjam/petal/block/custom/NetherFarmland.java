@@ -17,13 +17,14 @@ import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class NetherFarmland extends FarmlandBlock {
     public NetherFarmland(Properties settings) {
         super(settings);
     }
 
-    protected void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    protected void tick(BlockState state, @NonNull ServerLevel world, @NonNull BlockPos pos, @NonNull RandomSource random) {
         if (!state.canSurvive(world, pos)) {
             setToSoil(null, state, world, pos);
         }
@@ -39,7 +40,7 @@ public class NetherFarmland extends FarmlandBlock {
     }
 
     @Override
-    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
+    public void stepOn(@NonNull Level world, @NonNull BlockPos pos, BlockState state, Entity entity) {
         int i = state.getValue(MOISTURE);
         if (!entity.isSteppingCarefully() && entity instanceof LivingEntity && i == 7) {
             entity.hurt(world.damageSources().hotFloor(), 1.0F);
@@ -53,14 +54,14 @@ public class NetherFarmland extends FarmlandBlock {
 
     protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         int i = state.getValue(MOISTURE);
-        if (!isLavaNearby(world, pos)) {
-            if (i > 0) {
-                world.setBlock(pos, state.setValue(MOISTURE, i - 1), 2);
-            } else if (!hasCrop(world, pos)) {
-                setToSoil(null, state, world, pos);
+        if (world.dimension() == Level.NETHER && isLavaNearby(world, pos)) {
+            if (i < 7) {
+                world.setBlock(pos, state.setValue(MOISTURE, 7), 2);
             }
-        } else if (i < 7) {
-            world.setBlock(pos, state.setValue(MOISTURE, 7), 2);
+        } else if (i > 0) {
+            world.setBlock(pos, state.setValue(MOISTURE, i - 1), 2);
+        } else if (!hasCrop(world, pos)) {
+            setToSoil(null, state, world, pos);
         }
     }
 
@@ -71,7 +72,7 @@ public class NetherFarmland extends FarmlandBlock {
     }
 
     @Override
-    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+    public void fallOn(@NonNull Level world, @NonNull BlockState state, @NonNull BlockPos pos, @NonNull Entity entity, double fallDistance) {
         if (world instanceof ServerLevel serverWorld
                 && world.getRandom().nextFloat() < fallDistance - 0.5
                 && entity instanceof LivingEntity

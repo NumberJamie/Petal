@@ -15,7 +15,6 @@ import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class PetalModelProvider extends FabricModelProvider {
     public PetalModelProvider(FabricPackOutput output) {
@@ -31,6 +30,8 @@ public class PetalModelProvider extends FabricModelProvider {
         generator.createCrossBlock(PetalBlocks.MAGMA_BLOOM, BlockModelGenerators.PlantType.NOT_TINTED);
         generator.registerSimpleFlatItemModel(PetalBlocks.MAGMA_BLOOM);
         generator.createTrivialBlock(PetalBlocks.HUGE_TURNIP, TexturedModel.CUBE_TOP_BOTTOM);
+        generator.createCrossBlock(PetalBlocks.TURNIP_GREENS, BlockModelGenerators.PlantType.NOT_TINTED);
+        generator.registerSimpleFlatItemModel(PetalBlocks.TURNIP_GREENS);
 
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
         registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);

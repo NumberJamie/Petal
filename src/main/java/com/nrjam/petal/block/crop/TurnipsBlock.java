@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 
 public class TurnipsBlock extends CropBlock {
     public static final int MAX_AGE = 3;
@@ -27,12 +28,12 @@ public class TurnipsBlock extends CropBlock {
     }
 
     @Override
-    protected ItemLike getBaseSeedId() {
+    protected @NonNull ItemLike getBaseSeedId() {
         return PetalItems.TURNIP;
     }
 
     @Override
-    public IntegerProperty getAgeProperty() {
+    public @NonNull IntegerProperty getAgeProperty() {
         return AGE;
     }
 
@@ -42,10 +43,13 @@ public class TurnipsBlock extends CropBlock {
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NonNull BlockState state, @NonNull ServerLevel world, @NonNull BlockPos pos, RandomSource random) {
         if (random.nextInt(3) != 0) {
             if (this.getAge(state) + 1 >= MAX_AGE && random.nextInt(256) == 0) {
-                world.setBlock(pos, PetalBlocks.HUGE_TURNIP.defaultBlockState(), Block.UPDATE_NEIGHBORS);
+                world.setBlock(pos, PetalBlocks.HUGE_TURNIP.defaultBlockState(), Block.UPDATE_ALL);
+                if (world.isEmptyBlock(pos.above())) {
+                    world.setBlock(pos.above(), PetalBlocks.TURNIP_GREENS.defaultBlockState(), Block.UPDATE_ALL);
+                }
             } else {
                 super.randomTick(state, world, pos, random);
             }
@@ -53,12 +57,12 @@ public class TurnipsBlock extends CropBlock {
     }
 
     @Override
-    protected int getBonemealAgeIncrease(Level world) {
+    protected int getBonemealAgeIncrease(@NonNull Level world) {
         return super.getBonemealAgeIncrease(world) / 3;
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    protected @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
         return SHAPES_BY_AGE[this.getAge(state)];
     }
 

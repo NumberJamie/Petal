@@ -46,6 +46,7 @@ public class PetalLootTableProvider extends FabricBlockLootSubProvider {
                         .apply(ApplyBonusCount.addUniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
         )));
         add(PetalBlocks.DEAD_ROOTS, createShearsOrSilkTouchOnlyDrop(PetalBlocks.DEAD_ROOTS));
+        add(PetalBlocks.TURNIP_GREENS, createShearsOrSilkTouchOnlyDrop(PetalBlocks.TURNIP_GREENS));
         add(PetalBlocks.LAVA_ROOT, createSilkTouchOrShearsDispatchTable(PetalBlocks.LAVA_ROOT, applyExplosionDecay(
                 PetalBlocks.LAVA_ROOT, LootItem.lootTableItem(PetalItems.LAVA_FRUIT)
                         .when(LootItemRandomChanceCondition.randomChance(0.125f))

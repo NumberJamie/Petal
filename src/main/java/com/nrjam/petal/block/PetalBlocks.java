@@ -29,6 +29,7 @@ public class PetalBlocks {
             itemGroup.accept(DEAD_ROOTS.asItem());
             itemGroup.accept(LAVA_ROOT.asItem());
             itemGroup.accept(MAGMA_BLOOM.asItem());
+            itemGroup.accept(TURNIP_GREENS.asItem());
         });
 
         TillableBlockRegistry.register(Blocks.MUD, ctx -> true, PetalBlocks.MUDDY_FARMLAND.defaultBlockState());
@@ -47,6 +48,7 @@ public class PetalBlocks {
     public static final Block TURNIPS = register("turnips", TurnipsBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES), false);
 
     public static final Block HUGE_TURNIP = register("huge_turnip", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MELON), true);
+    public static final Block TURNIP_GREENS = register("turnip_greens", TurnipGreens::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.NONE), true);
 
     private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean registerItem) {
         ResourceKey<Block> blockKey = keyOfBlock(name);
