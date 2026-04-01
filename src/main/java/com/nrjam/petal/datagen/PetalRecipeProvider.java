@@ -2,52 +2,48 @@ package com.nrjam.petal.datagen;
 
 import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.PetalItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class PetalRecipeProvider extends FabricRecipeProvider {
-    public PetalRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public PetalRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup wrapperLookup, RecipeExporter exporter) {
-        return new RecipeGenerator(wrapperLookup, exporter) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        return new RecipeProvider(registries, output) {
             @Override
-            public void generate() {
-                RegistryWrapper.Impl<Item> itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
-
-                createCondensingRecipe(RecipeCategory.FOOD, PetalBlocks.HUGE_TURNIP, Ingredient.ofItem(PetalItems.TURNIP));
-                createShapeless(RecipeCategory.FOOD, PetalItems.FUGU)
-                        .input(Items.PUFFERFISH)
-                        .criterion(hasItem(Items.PUFFERFISH), conditionsFromItem(Items.PUFFERFISH))
-                        .offerTo(exporter);
-                createShapeless(RecipeCategory.FOOD, PetalItems.MOUSSE)
-                        .input(ItemTags.EGGS).input(Items.MILK_BUCKET).input(Items.COCOA_BEANS).input(Items.SUGAR)
-                        .criterion(hasItem(Items.COCOA_BEANS), conditionsFromItem(Items.COCOA_BEANS))
-                        .offerTo(exporter);
-                createShapeless(RecipeCategory.FOOD, PetalItems.TURNIP_PIE)
-                        .input(ItemTags.EGGS).input(PetalItems.TURNIP).input(Items.SUGAR)
-                        .criterion(hasItem(PetalItems.TURNIP), conditionsFromItem(PetalItems.TURNIP))
-                        .offerTo(exporter);
-                createShapeless(RecipeCategory.FOOD, PetalItems.GLAZED_TURNIP)
-                        .input(PetalItems.ROASTED_TURNIP).input(Items.HONEY_BOTTLE)
-                        .criterion(hasItem(PetalItems.ROASTED_TURNIP), conditionsFromItem(PetalItems.ROASTED_TURNIP))
-                        .offerTo(exporter);
-                offerSmelting(List.of(PetalItems.TURNIP), RecipeCategory.FOOD, PetalItems.ROASTED_TURNIP, .25f, 200, "roasted_turnip");
-                offerSmelting(List.of(PetalItems.LAVA_FRUIT), RecipeCategory.FOOD, PetalItems.BAKED_LAVA_FRUIT, .25f, 200, "baked_lava_fruit");
+            public void buildRecipes() {
+                threeByThreePacker(RecipeCategory.FOOD, PetalBlocks.HUGE_TURNIP, PetalItems.TURNIP);
+                shapeless(RecipeCategory.FOOD, PetalItems.FUGU)
+                        .requires(Items.PUFFERFISH)
+                        .unlockedBy(getHasName(Items.PUFFERFISH), has(Items.PUFFERFISH))
+                        .save(output);
+                shapeless(RecipeCategory.FOOD, PetalItems.MOUSSE)
+                        .requires(ItemTags.EGGS).requires(Items.MILK_BUCKET).requires(Items.COCOA_BEANS).requires(Items.SUGAR)
+                        .unlockedBy(getHasName(Items.COCOA_BEANS), has(Items.COCOA_BEANS))
+                        .save(output);
+                shapeless(RecipeCategory.FOOD, PetalItems.TURNIP_PIE)
+                        .requires(ItemTags.EGGS).requires(PetalItems.TURNIP).requires(Items.SUGAR)
+                        .unlockedBy(getHasName(PetalItems.TURNIP), has(PetalItems.TURNIP))
+                        .save(output);
+                shapeless(RecipeCategory.FOOD, PetalItems.GLAZED_TURNIP)
+                        .requires(PetalItems.ROASTED_TURNIP).requires(Items.HONEY_BOTTLE)
+                        .unlockedBy(getHasName(PetalItems.ROASTED_TURNIP), has(PetalItems.ROASTED_TURNIP))
+                        .save(output);
+                oreSmelting(List.of(PetalItems.TURNIP), RecipeCategory.FOOD, CookingBookCategory.FOOD, PetalItems.ROASTED_TURNIP, .25f, 200, "roasted_turnip");
+                oreSmelting(List.of(PetalItems.LAVA_FRUIT), RecipeCategory.FOOD, CookingBookCategory.FOOD, PetalItems.BAKED_LAVA_FRUIT, .25f, 200, "baked_lava_fruit");
             }
         };
     }

@@ -1,33 +1,41 @@
 package com.nrjam.petal.worldgen;
 
 import com.nrjam.petal.Petal;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placementmodifier.*;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.TrapezoidInt;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.*;
+
 import java.util.List;
 
 public class PetalPlacedFeature {
-    public static final RegistryKey<PlacedFeature> DEAD_ROOTS_PLACED = registerKey("dead_roots_placed");
-    public static final RegistryKey<PlacedFeature> MAGMA_BLOOM_PLACED = registerKey("magma_bloom_placed");
+    public static final ResourceKey<PlacedFeature> DEAD_ROOTS_PLACED = registerKey("dead_roots_placed");
+    public static final ResourceKey<PlacedFeature> MAGMA_BLOOM_PLACED = registerKey("magma_bloom_placed");
 
-    public static void initialize(Registerable<PlacedFeature> ctx) {
-        var configuredFeature = ctx.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
+    public static void initialize(BootstrapContext<PlacedFeature> ctx) {
+        var configuredFeature = ctx.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(ctx, DEAD_ROOTS_PLACED, configuredFeature.getOrThrow(PetalConfiguredFeature.DEAD_ROOTS_KEY), CountPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, BiomePlacementModifier.of());
-        register(ctx, MAGMA_BLOOM_PLACED, configuredFeature.getOrThrow(PetalConfiguredFeature.MAGMA_BLOOM_KEY), CountPlacementModifier.of(32), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, BiomePlacementModifier.of());
+        register(ctx, DEAD_ROOTS_PLACED, configuredFeature.getOrThrow(PetalConfiguredFeature.DEAD_ROOTS_KEY), CountPlacement.of(6), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome(), CountPlacement.of(96), RandomOffsetPlacement.of(TrapezoidInt.of(-7, 7, 0), TrapezoidInt.of(-3, 3, 0)), BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE));
+        register(ctx, MAGMA_BLOOM_PLACED, configuredFeature.getOrThrow(PetalConfiguredFeature.MAGMA_BLOOM_KEY), CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome(), BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE));
     }
 
-    public static RegistryKey<PlacedFeature> registerKey(String name) {
-        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(Petal.MOD_ID, name));
+    public static ResourceKey<PlacedFeature> registerKey(String name) {
+        return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(Petal.MOD_ID, name));
     }
 
-    private static void register(Registerable<PlacedFeature> ctx, RegistryKey<PlacedFeature> key, RegistryEntry<ConfiguredFeature<?, ?>> config, List<PlacementModifier> modifier) {
+    private static void register(BootstrapContext<PlacedFeature> ctx, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> config, List<PlacementModifier> modifier) {
         ctx.register(key, new PlacedFeature(config, List.copyOf(modifier)));
     }
 
-    private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<PlacedFeature> ctx, RegistryKey<PlacedFeature> key, RegistryEntry<ConfiguredFeature<?, ?>> configuration, PlacementModifier... modifier) {
+    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<PlacedFeature> ctx, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, PlacementModifier... modifier) {
         register(ctx, key, configuration, List.of(modifier));
     }
 }

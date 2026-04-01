@@ -2,34 +2,38 @@ package com.nrjam.petal.block.crop;
 
 import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.PetalItems;
-import net.minecraft.block.*;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class MagmaBerriesBlock extends CropBlock {
     public static final int MAX_AGE = 3;
-    public static final IntProperty AGE = Properties.AGE_3;
-    private static final VoxelShape[] SHAPES_BY_AGE = Block.createShapeArray(7, age -> Block.createColumnShape(16.0, 0.0, 2 + age));
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+    private static final VoxelShape[] SHAPES_BY_AGE = Block.boxes(4, age -> Block.column(16.0, 0.0, 2 + age));
 
-    public MagmaBerriesBlock(AbstractBlock.Settings settings) {
+    public MagmaBerriesBlock(BlockBehaviour.Properties settings) {
         super(settings);
     }
 
     @Override
-    protected ItemConvertible getSeedsItem() {
+    protected ItemLike getBaseSeedId() {
         return PetalItems.MAGMA_BERRY;
     }
 
     @Override
-    public IntProperty getAgeProperty() {
+    public IntegerProperty getAgeProperty() {
         return AGE;
     }
 
@@ -39,29 +43,29 @@ public class MagmaBerriesBlock extends CropBlock {
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (random.nextInt(3) != 0) {
             super.randomTick(state, world, pos, random);
         }
     }
 
     @Override
-    protected int getGrowthAmount(World world) {
-        return super.getGrowthAmount(world) / 3;
+    protected int getBonemealAgeIncrease(Level world) {
+        return super.getBonemealAgeIncrease(world) / 3;
     }
 
     @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPES_BY_AGE[this.getAge(state)];
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
     }
 
     @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(PetalBlocks.NETHER_FARMLAND);
+    protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
+        return floor.is(PetalBlocks.NETHER_FARMLAND);
     }
 }

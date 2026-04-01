@@ -4,7 +4,6 @@ import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.PetalItems;
 import com.nrjam.petal.util.PetalComposting;
 import com.nrjam.petal.util.PetalLootModifiers;
-import com.nrjam.petal.util.PetalVillagerOffers;
 import com.nrjam.petal.worldgen.PetalWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
@@ -18,7 +17,6 @@ public class Petal implements ModInitializer {
 		PetalBlocks.initialize();
 		PetalComposting.initialize();
 		PetalLootModifiers.initialize();
-		PetalVillagerOffers.initialize();
 		PetalWorldGeneration.initialize();
 	}
 }

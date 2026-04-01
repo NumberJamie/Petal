@@ -1,32 +1,29 @@
 package com.nrjam.petal.block.custom;
 
-import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class MagmaBloom extends PlantBlock {
-    public static final MapCodec<MagmaBloom> CODEC = createCodec(MagmaBloom::new);
-    private static final VoxelShape SHAPE = Block.createColumnShape(12.0, 0.0, 8.0);
+public class MagmaBloom extends BushBlock {
+    private static final VoxelShape SHAPE = Block.column(12.0, 0.0, 8.0);
 
-    public MagmaBloom(Settings settings) {
+    public MagmaBloom(Properties settings) {
         super(settings);
     }
 
     @Override
-    protected MapCodec<? extends PlantBlock> getCodec() {
-        return CODEC;
-    }
-
-    @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isIn(BlockTags.NETHER_CARVER_REPLACEABLES) || floor.isOf(Blocks.MAGMA_BLOCK) || super.canPlantOnTop(floor, world, pos);
+    protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
+        return floor.is(BlockTags.NETHER_CARVER_REPLACEABLES) || floor.is(Blocks.MAGMA_BLOCK) || super.mayPlaceOn(floor, world, pos);
     }
 }

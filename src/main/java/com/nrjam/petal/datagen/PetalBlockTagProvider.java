@@ -1,31 +1,32 @@
 package com.nrjam.petal.datagen;
 
 import com.nrjam.petal.block.PetalBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
-public class PetalBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public PetalBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+public class PetalBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
+    public PetalBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        valueLookupBuilder(BlockTags.SHOVEL_MINEABLE)
+    protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(PetalBlocks.MUDDY_FARMLAND)
                 .add(PetalBlocks.NETHER_FARMLAND);
 
-        valueLookupBuilder(BlockTags.AXE_MINEABLE)
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .add(PetalBlocks.HUGE_TURNIP);
 
-        valueLookupBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON)
+        valueLookupBuilder(BlockTags.SUPPORTS_DRY_VEGETATION)
                 .add(PetalBlocks.MUDDY_FARMLAND);
 
-        valueLookupBuilder(BlockTags.BIG_DRIPLEAF_PLACEABLE)
+        valueLookupBuilder(BlockTags.SUPPORTS_BIG_DRIPLEAF)
                 .add(PetalBlocks.MUDDY_FARMLAND)
                 .add(PetalBlocks.NETHER_FARMLAND);
 

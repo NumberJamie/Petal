@@ -1,28 +1,7 @@
 {
   "variants": {
-    "moisture=0": {
+    "": {
       "model": "petal:block/nether_farmland"
-    },
-    "moisture=1": {
-      "model": "petal:block/nether_farmland"
-    },
-    "moisture=2": {
-      "model": "petal:block/nether_farmland"
-    },
-    "moisture=3": {
-      "model": "petal:block/nether_farmland"
-    },
-    "moisture=4": {
-      "model": "petal:block/nether_farmland"
-    },
-    "moisture=5": {
-      "model": "petal:block/nether_farmland"
-    },
-    "moisture=6": {
-      "model": "petal:block/nether_farmland"
-    },
-    "moisture=7": {
-      "model": "petal:block/nether_farmland_moist"
     }
   }
 }

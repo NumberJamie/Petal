@@ -4,71 +4,68 @@ import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.block.crop.MagmaBerriesBlock;
 import com.nrjam.petal.block.crop.TurnipsBlock;
 import com.nrjam.petal.item.PetalItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CarrotsBlock;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.condition.RandomChanceLootCondition;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.LootPoolEntry;
-import net.minecraft.loot.function.ApplyBonusLootFunction;
-import net.minecraft.loot.function.LimitCountLootFunction;
-import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.operator.BoundedIntUnaryOperator;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.predicate.StatePredicate;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.IntRange;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.LimitCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.concurrent.CompletableFuture;
 
-public class PetalLootTableProvider extends FabricBlockLootTableProvider {
-    public PetalLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+public class PetalLootTableProvider extends FabricBlockLootSubProvider {
+    public PetalLootTableProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, registryLookup);
     }
 
     @Override
     public void generate() {
-        RegistryWrapper.Impl<Enchantment> impl = registries.getOrThrow(RegistryKeys.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Enchantment> impl = registries.lookupOrThrow(Registries.ENCHANTMENT);
 
-        LootCondition.Builder builder = BlockStatePropertyLootCondition.builder(PetalBlocks.TURNIPS)
-                .properties(StatePredicate.Builder.create().exactMatch(TurnipsBlock.AGE, TurnipsBlock.MAX_AGE));
-        LootCondition.Builder builder2 = BlockStatePropertyLootCondition.builder(PetalBlocks.MAGMA_BERRIES)
-                .properties(StatePredicate.Builder.create().exactMatch(MagmaBerriesBlock.AGE, MagmaBerriesBlock.MAX_AGE));
+        LootItemCondition.Builder builder = LootItemBlockStatePropertyCondition.hasBlockStateProperties(PetalBlocks.TURNIPS)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TurnipsBlock.AGE, TurnipsBlock.MAX_AGE));
+        LootItemCondition.Builder builder2 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(PetalBlocks.MAGMA_BERRIES)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MagmaBerriesBlock.AGE, MagmaBerriesBlock.MAX_AGE));
 
-        addDrop(PetalBlocks.MAGMA_BLOOM, dropsWithSilkTouchOrShears(PetalBlocks.MAGMA_BLOOM, applyExplosionDecay(
-                PetalBlocks.MAGMA_BLOOM, ItemEntry.builder(PetalItems.MAGMA_BERRY)
-                        .conditionally(RandomChanceLootCondition.builder(0.125f))
-                        .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
+        add(PetalBlocks.MAGMA_BLOOM, createSilkTouchOrShearsDispatchTable(PetalBlocks.MAGMA_BLOOM, applyExplosionDecay(
+                PetalBlocks.MAGMA_BLOOM, LootItem.lootTableItem(PetalItems.MAGMA_BERRY)
+                        .when(LootItemRandomChanceCondition.randomChance(0.125f))
+                        .apply(ApplyBonusCount.addUniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
         )));
-        addDrop(PetalBlocks.DEAD_ROOTS, dropsWithSilkTouchOrShears(PetalBlocks.DEAD_ROOTS));
-        addDrop(PetalBlocks.LAVA_ROOT, dropsWithSilkTouchOrShears(PetalBlocks.LAVA_ROOT, applyExplosionDecay(
-                PetalBlocks.LAVA_ROOT, ItemEntry.builder(PetalItems.LAVA_FRUIT)
-                        .conditionally(RandomChanceLootCondition.builder(0.125f))
-                        .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
+        add(PetalBlocks.DEAD_ROOTS, createShearsOrSilkTouchOnlyDrop(PetalBlocks.DEAD_ROOTS));
+        add(PetalBlocks.LAVA_ROOT, createSilkTouchOrShearsDispatchTable(PetalBlocks.LAVA_ROOT, applyExplosionDecay(
+                PetalBlocks.LAVA_ROOT, LootItem.lootTableItem(PetalItems.LAVA_FRUIT)
+                        .when(LootItemRandomChanceCondition.randomChance(0.125f))
+                        .apply(ApplyBonusCount.addUniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
         )));
-        addDrop(PetalBlocks.HUGE_TURNIP, dropsWithSilkTouch(PetalBlocks.HUGE_TURNIP, applyExplosionDecay(
-                PetalBlocks.HUGE_TURNIP, ItemEntry.builder(PetalItems.TURNIP)
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(3.0F, 7.0F)))
-                        .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE)))
-                        .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMax(9)))
+        add(PetalBlocks.HUGE_TURNIP, createSilkTouchDispatchTable(PetalBlocks.HUGE_TURNIP, applyExplosionDecay(
+                PetalBlocks.HUGE_TURNIP, LootItem.lootTableItem(PetalItems.TURNIP)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F)))
+                        .apply(ApplyBonusCount.addUniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE)))
+                        .apply(LimitCount.limitCount(IntRange.upperBound(9)))
         )));
 
-        addDrop(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
-        addDrop(PetalBlocks.NETHER_FARMLAND, Blocks.SOUL_SOIL);
-        addDrop(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.builder()
-                                .pool(LootPool.builder().with(ItemEntry.builder(PetalItems.TURNIP)))
-                                .pool(LootPool.builder().conditionally(builder).with(ItemEntry.builder(PetalItems.TURNIP).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
-        addDrop(PetalBlocks.MAGMA_BERRIES, applyExplosionDecay(PetalBlocks.MAGMA_BERRIES, LootTable.builder()
-                .pool(LootPool.builder().with(ItemEntry.builder(PetalItems.MAGMA_BERRY)))
-                .pool(LootPool.builder().with(ItemEntry.builder(PetalBlocks.MAGMA_BLOOM)).conditionally(RandomChanceLootCondition.builder(0.2F)))
-                .pool(LootPool.builder().conditionally(builder2).with(ItemEntry.builder(PetalItems.MAGMA_BERRY).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
+        dropOther(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
+        dropOther(PetalBlocks.NETHER_FARMLAND, Blocks.SOUL_SOIL);
+        add(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.lootTable()
+                                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(PetalItems.TURNIP)))
+                                .withPool(LootPool.lootPool().when(builder).add(LootItem.lootTableItem(PetalItems.TURNIP).apply(ApplyBonusCount.addBonusBinomialDistributionCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
+        add(PetalBlocks.MAGMA_BERRIES, applyExplosionDecay(PetalBlocks.MAGMA_BERRIES, LootTable.lootTable()
+                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(PetalItems.MAGMA_BERRY)))
+                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(PetalBlocks.MAGMA_BLOOM)).when(LootItemRandomChanceCondition.randomChance(0.2F)))
+                .withPool(LootPool.lootPool().when(builder2).add(LootItem.lootTableItem(PetalItems.MAGMA_BERRY).apply(ApplyBonusCount.addBonusBinomialDistributionCount(impl.getOrThrow(Enchantments.FORTUNE), 0.3f, 1))))));
     }
 }

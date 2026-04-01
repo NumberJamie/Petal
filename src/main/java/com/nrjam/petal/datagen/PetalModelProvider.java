@@ -5,67 +5,64 @@ import com.nrjam.petal.block.crop.MagmaBerriesBlock;
 import com.nrjam.petal.block.crop.TurnipsBlock;
 import com.nrjam.petal.item.PetalItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.data.*;
-import net.minecraft.client.render.model.json.WeightedVariant;
-import net.minecraft.state.property.Properties;
-
-import static net.minecraft.client.data.BlockStateModelGenerator.createValueFencedModelMap;
-import static net.minecraft.client.data.BlockStateModelGenerator.createWeightedVariant;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class PetalModelProvider extends FabricModelProvider {
-    public PetalModelProvider(FabricDataOutput output) {
+    public PetalModelProvider(FabricPackOutput output) {
         super(output);
     }
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator generator) {
-        generator.registerTintableCrossBlockState(PetalBlocks.DEAD_ROOTS, BlockStateModelGenerator.CrossType.NOT_TINTED);
-        generator.registerItemModel(PetalBlocks.DEAD_ROOTS);
-        generator.registerTintableCrossBlockState(PetalBlocks.LAVA_ROOT, BlockStateModelGenerator.CrossType.NOT_TINTED);
-        generator.registerItemModel(PetalBlocks.LAVA_ROOT);
-        generator.registerTintableCrossBlockState(PetalBlocks.MAGMA_BLOOM, BlockStateModelGenerator.CrossType.NOT_TINTED);
-        generator.registerItemModel(PetalBlocks.MAGMA_BLOOM);
-        generator.registerSingleton(PetalBlocks.HUGE_TURNIP, TexturedModel.CUBE_BOTTOM_TOP);
+    public void generateBlockStateModels(BlockModelGenerators generator) {
+        generator.createCrossBlock(PetalBlocks.DEAD_ROOTS, BlockModelGenerators.PlantType.NOT_TINTED);
+        generator.registerSimpleFlatItemModel(PetalBlocks.DEAD_ROOTS);
+        generator.createCrossBlock(PetalBlocks.LAVA_ROOT, BlockModelGenerators.PlantType.NOT_TINTED);
+        generator.registerSimpleFlatItemModel(PetalBlocks.LAVA_ROOT);
+        generator.createCrossBlock(PetalBlocks.MAGMA_BLOOM, BlockModelGenerators.PlantType.NOT_TINTED);
+        generator.registerSimpleFlatItemModel(PetalBlocks.MAGMA_BLOOM);
+        generator.createTrivialBlock(PetalBlocks.HUGE_TURNIP, TexturedModel.CUBE_TOP_BOTTOM);
 
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
         registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);
-        generator.registerCrop(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);
-        generator.registerTintableCrossBlockStateWithStages(PetalBlocks.MAGMA_BERRIES, BlockStateModelGenerator.CrossType.TINTED, MagmaBerriesBlock.AGE, 0, 1, 2, 3);
+        generator.createCropBlock(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);
+        generator.createCrossBlock(PetalBlocks.MAGMA_BERRIES, BlockModelGenerators.PlantType.TINTED, MagmaBerriesBlock.AGE, 0, 1, 2, 3);
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator generator) {
-        generator.register(PetalItems.ROASTED_TURNIP, Models.GENERATED);
-        generator.register(PetalItems.GLAZED_TURNIP, Models.GENERATED);
-        generator.register(PetalItems.TURNIP_PIE, Models.GENERATED);
+    public void generateItemModels(ItemModelGenerators generator) {
+        generator.generateFlatItem(PetalItems.ROASTED_TURNIP, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(PetalItems.GLAZED_TURNIP, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(PetalItems.TURNIP_PIE, ModelTemplates.FLAT_ITEM);
 
-        generator.register(PetalItems.LAVA_FRUIT, Models.GENERATED);
-        generator.register(PetalItems.BAKED_LAVA_FRUIT, Models.GENERATED);
+        generator.generateFlatItem(PetalItems.LAVA_FRUIT, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(PetalItems.BAKED_LAVA_FRUIT, ModelTemplates.FLAT_ITEM);
 
-        generator.register(PetalItems.FUGU, Models.GENERATED);
-        generator.register(PetalItems.MOUSSE, Models.GENERATED);
+        generator.generateFlatItem(PetalItems.FUGU, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(PetalItems.MOUSSE, ModelTemplates.FLAT_ITEM);
     }
 
-    private void registerFarmland(Block sideBlock, Block farmland, BlockStateModelGenerator generator) {
-        TextureMap dryTextures = new TextureMap()
-                .put(TextureKey.DIRT, TextureMap.getId(sideBlock))
-                .put(TextureKey.TOP, TextureMap.getId(farmland));
-        TextureMap moistTextures = new TextureMap()
-                .put(TextureKey.DIRT, TextureMap.getId(sideBlock))
-                .put(TextureKey.TOP, TextureMap.getSubId(farmland, "_moist"));
-        WeightedVariant dryModel = createWeightedVariant(
-                Models.TEMPLATE_FARMLAND.upload(farmland, dryTextures, generator.modelCollector)
-        );
-        WeightedVariant moistModel = createWeightedVariant(
-                Models.TEMPLATE_FARMLAND.upload(TextureMap.getSubId(farmland, "_moist"), moistTextures, generator.modelCollector)
-        );
+    private void registerFarmland(Block sideBlock, Block farmland, BlockModelGenerators generator) {
+        TextureMapping dryTextures = new TextureMapping()
+                .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(sideBlock))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(farmland));
+        TextureMapping moistTextures = new TextureMapping()
+                .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(sideBlock))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(farmland, "_moist"));
+        Identifier dryModelId = ModelTemplates.FARMLAND.create(farmland, dryTextures, generator.modelOutput);
+        Identifier moistModelId = ModelTemplates.FARMLAND.createWithSuffix(farmland, "_moist", moistTextures, generator.modelOutput);
 
-        generator.blockStateCollector.accept(
-                VariantsBlockModelDefinitionCreator.of(farmland)
-                        .with(createValueFencedModelMap(Properties.MOISTURE, 7, moistModel, dryModel))
+        generator.blockStateOutput.accept(
+                BlockModelGenerators.createSimpleBlock(farmland, BlockModelGenerators.plainVariant(dryModelId))
         );
     }
 }

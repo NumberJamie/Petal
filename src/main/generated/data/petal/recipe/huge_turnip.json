@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "petal:turnip",
+    "petal:turnip",
+    "petal:turnip",
+    "petal:turnip",
+    "petal:turnip",
+    "petal:turnip",
+    "petal:turnip",
+    "petal:turnip",
+    "petal:turnip"
+  ],
+  "result": {
+    "id": "petal:huge_turnip"
+  }
+}

@@ -4,29 +4,30 @@ import com.nrjam.petal.Petal;
 import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.component.PetalConsumableComponent;
 import com.nrjam.petal.item.component.PetalFoodComponent;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.*;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 
 import java.util.function.Function;
 
 public class PetalItems {
     public static void initialize() {
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(itemGroup -> {
-            itemGroup.add(TURNIP);
-            itemGroup.add(ROASTED_TURNIP);
-            itemGroup.add(GLAZED_TURNIP);
-            itemGroup.add(TURNIP_PIE);
-            itemGroup.add(LAVA_FRUIT);
-            itemGroup.add(BAKED_LAVA_FRUIT);
-            itemGroup.add(MAGMA_BERRY);
-            itemGroup.add(FUGU);
-            itemGroup.add(MOUSSE);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(itemGroup -> {
+            itemGroup.accept(TURNIP);
+            itemGroup.accept(ROASTED_TURNIP);
+            itemGroup.accept(GLAZED_TURNIP);
+            itemGroup.accept(TURNIP_PIE);
+            itemGroup.accept(LAVA_FRUIT);
+            itemGroup.accept(BAKED_LAVA_FRUIT);
+            itemGroup.accept(MAGMA_BERRY);
+            itemGroup.accept(FUGU);
+            itemGroup.accept(MOUSSE);
         });
     }
 
@@ -42,10 +43,10 @@ public class PetalItems {
     public static final Item FUGU = register("fugu", settings -> new Item(settings.food(PetalFoodComponent.FUGU, PetalConsumableComponent.FUGU)));
     public static final Item MOUSSE = register("mousse", settings -> new Item(settings.food(PetalFoodComponent.MOUSSE)));
 
-    public static Item register(String name, Function<Item.Settings, Item> itemFactory) {
-        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Petal.MOD_ID, name));
-        Item item = itemFactory.apply(new Item.Settings().registryKey(itemKey));
-        Registry.register(Registries.ITEM, itemKey, item);
+    public static Item register(String name, Function<Item.Properties, Item> itemFactory) {
+        ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Petal.MOD_ID, name));
+        Item item = itemFactory.apply(new Item.Properties().setId(itemKey));
+        Registry.register(BuiltInRegistries.ITEM, itemKey, item);
         return item;
     }
 }
