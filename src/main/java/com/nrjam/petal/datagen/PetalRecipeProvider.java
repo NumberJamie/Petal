@@ -45,6 +45,10 @@ public class PetalRecipeProvider extends FabricRecipeProvider {
                         .save(output);
                 oreSmelting(List.of(PetalItems.TURNIP), RecipeCategory.FOOD, CookingBookCategory.FOOD, PetalItems.ROASTED_TURNIP, .25f, 200, "roasted_turnip");
                 oreSmelting(List.of(PetalItems.LAVA_FRUIT), RecipeCategory.FOOD, CookingBookCategory.FOOD, PetalItems.BAKED_LAVA_FRUIT, .25f, 200, "baked_lava_fruit");
+                shapeless(RecipeCategory.DECORATIONS, PetalBlocks.WATER_LILY)
+                        .requires(Items.SPORE_BLOSSOM).requires(PetalBlocks.WATER_LILY_PAD)
+                        .unlockedBy(getHasName(Items.SPORE_BLOSSOM), has(Items.SPORE_BLOSSOM))
+                        .save(output);
             }
         };
     }

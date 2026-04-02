@@ -15,6 +15,8 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.PlaceOnWaterBlockItem;
+import net.minecraft.world.level.block.LilyPadBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Function;
@@ -30,6 +32,8 @@ public class PetalBlocks {
             itemGroup.accept(LAVA_ROOT.asItem());
             itemGroup.accept(MAGMA_BLOOM.asItem());
             itemGroup.accept(TURNIP_GREENS.asItem());
+            itemGroup.accept(WATER_LILY_PAD.asItem());
+            itemGroup.accept(WATER_LILY.asItem());
         });
 
         TillableBlockRegistry.register(Blocks.MUD, ctx -> true, PetalBlocks.MUDDY_FARMLAND.defaultBlockState());
@@ -50,13 +54,26 @@ public class PetalBlocks {
     public static final Block HUGE_TURNIP = register("huge_turnip", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MELON), true);
     public static final Block TURNIP_GREENS = register("turnip_greens", TurnipGreens::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.NONE), true);
 
+    public static final Block WATER_LILY_PAD = register("water_lily_pad", LilyPadBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
+    public static final Block WATER_LILY = register("water_lily", WaterLily::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
+
+    private enum ItemType { BLOCK, WATER, NONE }
+
     private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean registerItem) {
+        return register(name, blockFactory, settings, registerItem ? ItemType.BLOCK : ItemType.NONE);
+    }
+
+    private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, ItemType itemType) {
         ResourceKey<Block> blockKey = keyOfBlock(name);
         Block block = blockFactory.apply(settings.setId(blockKey));
-        if (registerItem) {
+        if (itemType != ItemType.NONE) {
             ResourceKey<Item> itemKey = keyOfItem(name);
-            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey));
-            Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
+            Item item = switch (itemType) {
+                case WATER -> new PlaceOnWaterBlockItem(block, new Item.Properties().setId(itemKey));
+                case BLOCK -> new BlockItem(block, new Item.Properties().setId(itemKey));
+                default -> throw new IllegalStateException();
+            };
+            Registry.register(BuiltInRegistries.ITEM, itemKey, item);
         }
         return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
     }

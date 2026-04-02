@@ -1,0 +1,44 @@
+{
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#texture",
+          "tintindex": 0,
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            0.0
+          ]
+        },
+        "up": {
+          "texture": "#texture",
+          "tintindex": 0,
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        0.0,
+        0.25,
+        0.0
+      ],
+      "shade": false,
+      "to": [
+        16.0,
+        0.25,
+        16.0
+      ]
+    }
+  ],
+  "textures": {
+    "particle": "petal:block/water_lily_pad",
+    "texture": "petal:block/water_lily_pad"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "petal:block/water_lily_pad"
+      },
+      {
+        "model": "petal:block/water_lily_pad",
+        "y": 90
+      },
+      {
+        "model": "petal:block/water_lily_pad",
+        "y": 180
+      },
+      {
+        "model": "petal:block/water_lily_pad",
+        "y": 270
+      }
+    ]
+  }
+}

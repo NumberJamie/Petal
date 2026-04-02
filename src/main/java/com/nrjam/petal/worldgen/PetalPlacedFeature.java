@@ -8,6 +8,8 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.TrapezoidInt;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -19,12 +21,14 @@ import java.util.List;
 public class PetalPlacedFeature {
     public static final ResourceKey<PlacedFeature> DEAD_ROOTS_PLACED = registerKey("dead_roots_placed");
     public static final ResourceKey<PlacedFeature> MAGMA_BLOOM_PLACED = registerKey("magma_bloom_placed");
+    public static final ResourceKey<PlacedFeature> WATER_LILY_PAD_PLACED = registerKey("water_lily_pad_placed");
 
     public static void initialize(BootstrapContext<PlacedFeature> ctx) {
         var configuredFeature = ctx.lookup(Registries.CONFIGURED_FEATURE);
 
         register(ctx, DEAD_ROOTS_PLACED, configuredFeature.getOrThrow(PetalConfiguredFeature.DEAD_ROOTS_KEY), CountPlacement.of(6), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome(), CountPlacement.of(96), RandomOffsetPlacement.of(TrapezoidInt.of(-7, 7, 0), TrapezoidInt.of(-3, 3, 0)), BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE));
         register(ctx, MAGMA_BLOOM_PLACED, configuredFeature.getOrThrow(PetalConfiguredFeature.MAGMA_BLOOM_KEY), CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome(), BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE));
+        register(ctx, WATER_LILY_PAD_PLACED, configuredFeature.getOrThrow(PetalConfiguredFeature.WATER_LILY_PAD_KEY), CountPlacement.of(2), InSquarePlacement.spread(), HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), BiomeFilter.biome(), CountPlacement.of(5), RandomOffsetPlacement.of(TrapezoidInt.of(-7, 7, 0), TrapezoidInt.of(-3, 3, 0)), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockTags.AIR)));
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

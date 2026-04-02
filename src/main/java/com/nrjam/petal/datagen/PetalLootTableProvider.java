@@ -59,6 +59,8 @@ public class PetalLootTableProvider extends FabricBlockLootSubProvider {
                         .apply(LimitCount.limitCount(IntRange.upperBound(9)))
         )));
 
+        dropSelf(PetalBlocks.WATER_LILY_PAD);
+        dropSelf(PetalBlocks.WATER_LILY);
         dropOther(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
         dropOther(PetalBlocks.NETHER_FARMLAND, Blocks.SOUL_SOIL);
         add(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.lootTable()

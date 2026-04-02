@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "petal:water_lily_pad"
+          },
+          "weight": 85
+        },
+        {
+          "data": {
+            "Name": "petal:water_lily"
+          },
+          "weight": 15
+        }
+      ]
+    }
+  }
+}

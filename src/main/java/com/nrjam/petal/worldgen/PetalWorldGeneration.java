@@ -9,5 +9,6 @@ public class PetalWorldGeneration {
     public static void initialize() {
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.NETHER_WASTES), GenerationStep.Decoration.VEGETAL_DECORATION, PetalPlacedFeature.DEAD_ROOTS_PLACED);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(), GenerationStep.Decoration.VEGETAL_DECORATION, PetalPlacedFeature.MAGMA_BLOOM_PLACED);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.SWAMP, Biomes.MANGROVE_SWAMP), GenerationStep.Decoration.VEGETAL_DECORATION, PetalPlacedFeature.WATER_LILY_PAD_PLACED);
     }
 }

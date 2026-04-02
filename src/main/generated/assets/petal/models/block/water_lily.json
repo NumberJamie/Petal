@@ -1,0 +1,325 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        0.0,
+        225.0,
+        0.0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "translation": [
+        0.0,
+        4.0,
+        0.0
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0.0,
+        45.0,
+        0.0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "translation": [
+        0.0,
+        4.0,
+        0.0
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "translation": [
+        0.0,
+        3.0,
+        0.0
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "translation": [
+        0.0,
+        5.0,
+        0.0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30.0,
+        225.0,
+        0.0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0.0,
+        3.0,
+        0.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75.0,
+        45.0,
+        0.0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "translation": [
+        0.0,
+        2.5,
+        2.0
+      ]
+    }
+  },
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#base",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "shade": false,
+      "to": [
+        16.0,
+        0.1,
+        16.0
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#flower",
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            0.0
+          ]
+        },
+        "up": {
+          "texture": "#flower",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        4.0,
+        0.1,
+        -1.0
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8.0,
+          0.0,
+          7.0
+        ],
+        "rescale": false
+      },
+      "shade": false,
+      "to": [
+        12.0,
+        0.1,
+        7.0
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#flower",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#flower",
+          "uv": [
+            16.0,
+            16.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "from": [
+        4.0,
+        0.1,
+        9.0
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "x",
+        "origin": [
+          8.0,
+          0.0,
+          9.0
+        ],
+        "rescale": false
+      },
+      "shade": false,
+      "to": [
+        12.0,
+        0.1,
+        17.0
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "rotation": 270,
+          "texture": "#flower",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "up": {
+          "rotation": 90,
+          "texture": "#flower",
+          "uv": [
+            16.0,
+            16.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "from": [
+        -1.0,
+        0.1,
+        4.0
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "z",
+        "origin": [
+          7.0,
+          0.0,
+          8.0
+        ],
+        "rescale": false
+      },
+      "shade": false,
+      "to": [
+        7.0,
+        0.1,
+        12.0
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "rotation": 90,
+          "texture": "#flower",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "up": {
+          "rotation": 270,
+          "texture": "#flower",
+          "uv": [
+            16.0,
+            16.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "from": [
+        9.0,
+        0.1,
+        4.0
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "z",
+        "origin": [
+          9.0,
+          0.0,
+          8.0
+        ],
+        "rescale": false
+      },
+      "shade": false,
+      "to": [
+        17.0,
+        0.1,
+        12.0
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "base": "petal:block/water_lily_base",
+    "flower": "petal:block/water_lily",
+    "particle": "petal:block/water_lily"
+  }
+}
