@@ -52,7 +52,7 @@ public class NetherFarmland extends FarmlandBlock {
         return world.getBlockState(pos.above()).is(BlockTags.MAINTAINS_FARMLAND);
     }
 
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    protected void randomTick(BlockState state, ServerLevel world, @NonNull BlockPos pos, @NonNull RandomSource random) {
         int i = state.getValue(MOISTURE);
         if (world.dimension() == Level.NETHER && isLavaNearby(world, pos)) {
             if (i < 7) {

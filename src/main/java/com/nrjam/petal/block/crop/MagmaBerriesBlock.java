@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 
 public class MagmaBerriesBlock extends CropBlock {
     public static final int MAX_AGE = 3;
@@ -28,12 +29,12 @@ public class MagmaBerriesBlock extends CropBlock {
     }
 
     @Override
-    protected ItemLike getBaseSeedId() {
+    protected @NonNull ItemLike getBaseSeedId() {
         return PetalItems.MAGMA_BERRY;
     }
 
     @Override
-    public IntegerProperty getAgeProperty() {
+    public @NonNull IntegerProperty getAgeProperty() {
         return AGE;
     }
 
@@ -43,19 +44,19 @@ public class MagmaBerriesBlock extends CropBlock {
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NonNull BlockState state, @NonNull ServerLevel world, @NonNull BlockPos pos, RandomSource random) {
         if (random.nextInt(3) != 0) {
             super.randomTick(state, world, pos, random);
         }
     }
 
     @Override
-    protected int getBonemealAgeIncrease(Level world) {
+    protected int getBonemealAgeIncrease(@NonNull Level world) {
         return super.getBonemealAgeIncrease(world) / 3;
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    protected @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
         return SHAPES_BY_AGE[this.getAge(state)];
     }
 
@@ -65,7 +66,7 @@ public class MagmaBerriesBlock extends CropBlock {
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState floor, @NonNull BlockGetter world, @NonNull BlockPos pos) {
         return floor.is(PetalBlocks.NETHER_FARMLAND);
     }
 }

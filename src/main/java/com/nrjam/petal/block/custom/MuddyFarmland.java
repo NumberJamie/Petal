@@ -14,13 +14,14 @@ import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class MuddyFarmland extends FarmlandBlock {
     public MuddyFarmland(Properties settings) {
         super(settings);
     }
 
-    protected void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    protected void tick(BlockState state, @NonNull ServerLevel world, @NonNull BlockPos pos, @NonNull RandomSource random) {
         if (!state.canSurvive(world, pos)) {
             setToMud(null, state, world, pos);
         }
@@ -39,7 +40,7 @@ public class MuddyFarmland extends FarmlandBlock {
         return world.getBlockState(pos.above()).is(BlockTags.MAINTAINS_FARMLAND);
     }
 
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    protected void randomTick(BlockState state, @NonNull ServerLevel world, @NonNull BlockPos pos, @NonNull RandomSource random) {
         int i = state.getValue(MOISTURE);
         if (!isWaterNearby(world, pos) && !world.isRainingAt(pos.above())) {
             if (i > 0) {
@@ -59,7 +60,7 @@ public class MuddyFarmland extends FarmlandBlock {
     }
 
     @Override
-    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+    public void fallOn(@NonNull Level world, @NonNull BlockState state, @NonNull BlockPos pos, Entity entity, double fallDistance) {
         entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
     }
 }
