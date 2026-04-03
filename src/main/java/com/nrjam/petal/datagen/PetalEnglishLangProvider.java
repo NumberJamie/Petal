@@ -37,5 +37,10 @@ public class PetalEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.petal.turnip_greens", "Turnip Greens");
         translationBuilder.add("item.petal.water_lily_pad", "Water Lily Pad");
         translationBuilder.add("item.petal.water_lily", "Water Lily");
+
+        translationBuilder.add("item.petal.end_soil", "End Soil");
+        translationBuilder.add("item.petal.ender_root", "Ender Root");
+        translationBuilder.add("item.petal.blossoming_root", "Blossoming Root");
+        translationBuilder.add("biome.petal.end_fields", "End Fields");
     }
 }

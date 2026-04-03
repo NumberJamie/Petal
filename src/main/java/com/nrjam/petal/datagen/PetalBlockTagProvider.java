@@ -18,7 +18,8 @@ public class PetalBlockTagProvider extends FabricTagsProvider.BlockTagsProvider 
     protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
         valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(PetalBlocks.MUDDY_FARMLAND)
-                .add(PetalBlocks.NETHER_FARMLAND);
+                .add(PetalBlocks.NETHER_FARMLAND)
+                .add(PetalBlocks.END_SOIL);
 
         valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .add(PetalBlocks.HUGE_TURNIP);

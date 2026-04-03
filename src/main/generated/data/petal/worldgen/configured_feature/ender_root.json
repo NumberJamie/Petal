@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "petal:ender_root"
+          },
+          "weight": 90
+        },
+        {
+          "data": {
+            "Name": "petal:blossoming_root"
+          },
+          "weight": 10
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package com.nrjam.petal;
 
 import com.nrjam.petal.datagen.*;
+import com.nrjam.petal.worldgen.PetalBiomes;
 import com.nrjam.petal.worldgen.PetalConfiguredFeature;
 import com.nrjam.petal.worldgen.PetalPlacedFeature;
 import com.nrjam.petal.worldgen.PetalVillagerTrades;
@@ -21,6 +22,7 @@ public class PetalDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(PetalBlockTagProvider::new);
 		pack.addProvider(PetalVillagerTradeTagProvider::new);
 		pack.addProvider(PetalRegistryDataGenerator::new);
+		pack.addProvider(PetalEndNoiseSettingsProvider::new);
 	}
 
 	@Override
@@ -28,5 +30,6 @@ public class PetalDataGenerator implements DataGeneratorEntrypoint {
 		registryBuilder.add(Registries.CONFIGURED_FEATURE, PetalConfiguredFeature::initialize);
 		registryBuilder.add(Registries.PLACED_FEATURE, PetalPlacedFeature::initialize);
 		registryBuilder.add(Registries.VILLAGER_TRADE, PetalVillagerTrades::initialize);
+		registryBuilder.add(Registries.BIOME, PetalBiomes::initialize);
 	}
 }

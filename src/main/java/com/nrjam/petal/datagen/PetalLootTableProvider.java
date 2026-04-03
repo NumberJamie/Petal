@@ -61,6 +61,9 @@ public class PetalLootTableProvider extends FabricBlockLootSubProvider {
 
         dropSelf(PetalBlocks.WATER_LILY_PAD);
         dropSelf(PetalBlocks.WATER_LILY);
+        dropSelf(PetalBlocks.END_SOIL);
+        add(PetalBlocks.ENDER_ROOT, createShearsOrSilkTouchOnlyDrop(PetalBlocks.ENDER_ROOT));
+        add(PetalBlocks.BLOSSOMING_ROOT, createShearsOrSilkTouchOnlyDrop(PetalBlocks.BLOSSOMING_ROOT));
         dropOther(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
         dropOther(PetalBlocks.NETHER_FARMLAND, Blocks.SOUL_SOIL);
         add(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.lootTable()

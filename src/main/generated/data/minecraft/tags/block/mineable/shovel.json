@@ -1,6 +1,7 @@
 {
   "values": [
     "petal:muddy_farmland",
-    "petal:nether_farmland"
+    "petal:nether_farmland",
+    "petal:end_soil"
   ]
 }

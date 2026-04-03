@@ -40,4 +40,5 @@ replay_*.log
 *.jfr
 
 /src/main/generated/.cache/*
+net/
 assets/

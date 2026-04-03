@@ -18,6 +18,7 @@ public class PetalRegistryDataGenerator extends FabricDynamicRegistryProvider {
         entries.addAll(wrapperLookup.lookupOrThrow(Registries.CONFIGURED_FEATURE));
         entries.addAll(wrapperLookup.lookupOrThrow(Registries.PLACED_FEATURE));
         entries.addAll(wrapperLookup.lookupOrThrow(Registries.VILLAGER_TRADE));
+        entries.addAll(wrapperLookup.lookupOrThrow(Registries.BIOME));
     }
 
     @Override

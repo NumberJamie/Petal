@@ -45,6 +45,13 @@ public class PetalModelProvider extends FabricModelProvider {
         registerWaterLilyPadModel(generator);
         registerWaterLilyModel(generator);
 
+        generator.createTrivialCube(PetalBlocks.END_SOIL);
+        generator.createCrossBlock(PetalBlocks.ENDER_ROOT, BlockModelGenerators.PlantType.NOT_TINTED);
+        generator.registerSimpleFlatItemModel(PetalBlocks.ENDER_ROOT);
+        generator.createCrossBlock(PetalBlocks.BLOSSOMING_ROOT, BlockModelGenerators.PlantType.EMISSIVE_NOT_TINTED);
+        generator.registerSimpleItemModel(PetalBlocks.BLOSSOMING_ROOT.asItem(),
+                BlockModelGenerators.PlantType.EMISSIVE_NOT_TINTED.createItemModel(generator, PetalBlocks.BLOSSOMING_ROOT));
+
         registerFarmland(Blocks.MUD, PetalBlocks.MUDDY_FARMLAND, generator);
         registerFarmland(Blocks.SOUL_SOIL, PetalBlocks.NETHER_FARMLAND, generator);
         generator.createCropBlock(PetalBlocks.TURNIPS, TurnipsBlock.AGE, 0, 1, 2, 3);

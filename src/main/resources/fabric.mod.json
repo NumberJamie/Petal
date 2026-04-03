@@ -25,6 +25,7 @@
 			"com.nrjam.petal.PetalDataGenerator"
 		]
 	},
+	"accessWidener": "petal.accesswidener",
 	"mixins": [
 		"petal.mixins.json"
 	],

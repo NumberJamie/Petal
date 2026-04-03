@@ -34,6 +34,9 @@ public class PetalBlocks {
             itemGroup.accept(TURNIP_GREENS.asItem());
             itemGroup.accept(WATER_LILY_PAD.asItem());
             itemGroup.accept(WATER_LILY.asItem());
+            itemGroup.accept(END_SOIL.asItem());
+            itemGroup.accept(ENDER_ROOT.asItem());
+            itemGroup.accept(BLOSSOMING_ROOT.asItem());
         });
 
         TillableBlockRegistry.register(Blocks.MUD, ctx -> true, PetalBlocks.MUDDY_FARMLAND.defaultBlockState());
@@ -56,6 +59,11 @@ public class PetalBlocks {
 
     public static final Block WATER_LILY_PAD = register("water_lily_pad", LilyPadBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
     public static final Block WATER_LILY = register("water_lily", WaterLily::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
+
+    public static final Block END_SOIL = register("end_soil", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_SOIL), true);
+
+    public static final Block ENDER_ROOT = register("ender_root", EnderRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
+    public static final Block BLOSSOMING_ROOT = register("blossoming_root", BlossomingRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
 
     private enum ItemType { BLOCK, WATER, NONE }
 

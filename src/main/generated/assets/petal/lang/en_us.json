@@ -1,6 +1,10 @@
 {
+  "biome.petal.end_fields": "End Fields",
   "item.petal.baked_lava_fruit": "Baked Lava Fruit",
+  "item.petal.blossoming_root": "Blossoming Root",
   "item.petal.dead_roots": "Dead Roots",
+  "item.petal.end_soil": "End Soil",
+  "item.petal.ender_root": "Ender Root",
   "item.petal.fugu": "Fugu",
   "item.petal.glazed_turnip": "Glazed Turnip",
   "item.petal.huge_turnip": "Huge Turnip",
