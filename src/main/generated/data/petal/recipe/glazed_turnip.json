@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "petal:roasted_turnip",
     "minecraft:honey_bottle"

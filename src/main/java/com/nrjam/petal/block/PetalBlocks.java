@@ -1,6 +1,5 @@
 package com.nrjam.petal.block;
 
-import com.nrjam.petal.Petal;
 import com.nrjam.petal.block.crop.*;
 import com.nrjam.petal.block.custom.*;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -8,7 +7,6 @@ import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -43,39 +41,38 @@ public class PetalBlocks {
         TillableBlockRegistry.register(Blocks.SOUL_SOIL, ctx -> true, PetalBlocks.NETHER_FARMLAND.defaultBlockState());
     }
 
-    public static final Block MUDDY_FARMLAND = register("muddy_farmland", MuddyFarmland::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND), true);
-    public static final Block NETHER_FARMLAND = register("nether_farmland", NetherFarmland::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND), true);
+    public static final Block MUDDY_FARMLAND = register(PetalBlockIds.MUDDY_FARMLAND, MuddyFarmland::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND), true);
+    public static final Block NETHER_FARMLAND = register(PetalBlockIds.NETHER_FARMLAND, NetherFarmland::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND), true);
 
-    public static final Block DEAD_ROOTS = register("dead_roots", DeadRoots::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
-    public static final Block LAVA_ROOT = register("lava_root", LavaRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
-    public static final Block MAGMA_BLOOM = register("magma_bloom", MagmaBloom::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS).lightLevel(state -> 3), true);
+    public static final Block DEAD_ROOTS = register(PetalBlockIds.DEAD_ROOTS, DeadRoots::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
+    public static final Block LAVA_ROOT = register(PetalBlockIds.LAVA_ROOT, LavaRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
+    public static final Block MAGMA_BLOOM = register(PetalBlockIds.MAGMA_BLOOM, MagmaBloom::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS).lightLevel(state -> 3), true);
 
-    public static final Block MAGMA_BERRIES = register("magma_berries", MagmaBerriesBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES), false);
+    public static final Block MAGMA_BERRIES = register(PetalBlockIds.MAGMA_BERRIES, MagmaBerriesBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES), false);
 
-    public static final Block TURNIPS = register("turnips", TurnipsBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES), false);
+    public static final Block TURNIPS = register(PetalBlockIds.TURNIPS, TurnipsBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES), false);
 
-    public static final Block HUGE_TURNIP = register("huge_turnip", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MELON), true);
-    public static final Block TURNIP_GREENS = register("turnip_greens", TurnipGreens::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.NONE), true);
+    public static final Block HUGE_TURNIP = register(PetalBlockIds.HUGE_TURNIP, Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MELON), true);
+    public static final Block TURNIP_GREENS = register(PetalBlockIds.TURNIP_GREENS, TurnipGreens::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.NONE), true);
 
-    public static final Block WATER_LILY_PAD = register("water_lily_pad", LilyPadBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
-    public static final Block WATER_LILY = register("water_lily", WaterLily::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
+    public static final Block WATER_LILY_PAD = register(PetalBlockIds.WATER_LILY_PAD, LilyPadBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
+    public static final Block WATER_LILY = register(PetalBlockIds.WATER_LILY, WaterLily::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD), ItemType.WATER);
 
-    public static final Block END_SOIL = register("end_soil", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_SOIL), true);
+    public static final Block END_SOIL = register(PetalBlockIds.END_SOIL, Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_SOIL), true);
 
-    public static final Block ENDER_ROOT = register("ender_root", EnderRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
-    public static final Block BLOSSOMING_ROOT = register("blossoming_root", BlossomingRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
+    public static final Block ENDER_ROOT = register(PetalBlockIds.ENDER_ROOT, EnderRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
+    public static final Block BLOSSOMING_ROOT = register(PetalBlockIds.BLOSSOMING_ROOT, BlossomingRoot::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_SPROUTS), true);
 
     private enum ItemType { BLOCK, WATER, NONE }
 
-    private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean registerItem) {
-        return register(name, blockFactory, settings, registerItem ? ItemType.BLOCK : ItemType.NONE);
+    private static Block register(ResourceKey<Block> blockKey, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean registerItem) {
+        return register(blockKey, blockFactory, settings, registerItem ? ItemType.BLOCK : ItemType.NONE);
     }
 
-    private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, ItemType itemType) {
-        ResourceKey<Block> blockKey = keyOfBlock(name);
+    private static Block register(ResourceKey<Block> blockKey, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, ItemType itemType) {
         Block block = blockFactory.apply(settings.setId(blockKey));
         if (itemType != ItemType.NONE) {
-            ResourceKey<Item> itemKey = keyOfItem(name);
+            ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, blockKey.identifier());
             Item item = switch (itemType) {
                 case WATER -> new PlaceOnWaterBlockItem(block, new Item.Properties().setId(itemKey));
                 case BLOCK -> new BlockItem(block, new Item.Properties().setId(itemKey));
@@ -84,13 +81,5 @@ public class PetalBlocks {
             Registry.register(BuiltInRegistries.ITEM, itemKey, item);
         }
         return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
-    }
-
-    private static ResourceKey<Block> keyOfBlock(String name) {
-        return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Petal.MOD_ID, name));
-    }
-
-    private static ResourceKey<Item> keyOfItem(String name) {
-        return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Petal.MOD_ID, name));
     }
 }

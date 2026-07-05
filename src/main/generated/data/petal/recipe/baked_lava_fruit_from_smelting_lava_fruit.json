@@ -1,7 +1,6 @@
 {
   "type": "minecraft:smelting",
   "category": "food",
-  "cookingtime": 200,
   "experience": 0.25,
   "group": "baked_lava_fruit",
   "ingredient": "petal:lava_fruit",

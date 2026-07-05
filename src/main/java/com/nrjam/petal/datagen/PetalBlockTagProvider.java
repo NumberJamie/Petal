@@ -1,6 +1,6 @@
 package com.nrjam.petal.datagen;
 
-import com.nrjam.petal.block.PetalBlocks;
+import com.nrjam.petal.block.PetalBlockIds;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
@@ -16,22 +16,22 @@ public class PetalBlockTagProvider extends FabricTagsProvider.BlockTagsProvider 
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
-        valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(PetalBlocks.MUDDY_FARMLAND)
-                .add(PetalBlocks.NETHER_FARMLAND)
-                .add(PetalBlocks.END_SOIL);
+        builder(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(PetalBlockIds.MUDDY_FARMLAND)
+                .add(PetalBlockIds.NETHER_FARMLAND)
+                .add(PetalBlockIds.END_SOIL);
 
-        valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
-                .add(PetalBlocks.HUGE_TURNIP);
+        builder(BlockTags.MINEABLE_WITH_AXE)
+                .add(PetalBlockIds.HUGE_TURNIP);
 
-        valueLookupBuilder(BlockTags.SUPPORTS_DRY_VEGETATION)
-                .add(PetalBlocks.MUDDY_FARMLAND);
+        builder(BlockTags.SUPPORTS_DRY_VEGETATION)
+                .add(PetalBlockIds.MUDDY_FARMLAND);
 
-        valueLookupBuilder(BlockTags.SUPPORTS_BIG_DRIPLEAF)
-                .add(PetalBlocks.MUDDY_FARMLAND)
-                .add(PetalBlocks.NETHER_FARMLAND);
+        builder(BlockTags.SUPPORTS_BIG_DRIPLEAF)
+                .add(PetalBlockIds.MUDDY_FARMLAND)
+                .add(PetalBlockIds.NETHER_FARMLAND);
 
-        valueLookupBuilder(BlockTags.MAINTAINS_FARMLAND)
-                .add(PetalBlocks.TURNIPS);
+        builder(BlockTags.MAINTAINS_FARMLAND)
+                .add(PetalBlockIds.TURNIPS);
     }
 }

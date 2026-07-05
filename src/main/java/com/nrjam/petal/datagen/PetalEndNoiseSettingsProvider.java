@@ -34,9 +34,9 @@ public class PetalEndNoiseSettingsProvider implements DataProvider {
             HolderGetter<DensityFunction> densityFunctions = registries.lookupOrThrow(Registries.DENSITY_FUNCTION);
 
             SurfaceRules.RuleSource endFieldsRule = SurfaceRules.ifTrue(
-                    SurfaceRules.isBiome(PetalBiomes.END_FIELDS),
+                    SurfaceRules.isBiome(registries.lookupOrThrow(Registries.BIOME), PetalBiomes.END_FIELDS),
                     SurfaceRules.ifTrue(
-                            SurfaceRules.noiseCondition(Noises.SURFACE, -0.4, 0.4),
+                            SurfaceRules.noiseCondition2d(Noises.SURFACE, -0.4, 0.4),
                             SurfaceRules.ifTrue(
                                     SurfaceRules.VERY_DEEP_UNDER_FLOOR,
                                     SurfaceRules.state(PetalBlocks.END_SOIL.defaultBlockState())
