@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "petal:block/blossoming_root",
+    "layer1": "petal:block/blossoming_root_emissive"
+  }
+}

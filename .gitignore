@@ -41,4 +41,3 @@ replay_*.log
 
 /src/main/generated/.cache/*
 net/
-assets/

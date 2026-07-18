@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_end_blossom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "petal:end_blossom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "petal:petal_salad"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_end_blossom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "petal:petal_salad"
+    ]
+  }
+}

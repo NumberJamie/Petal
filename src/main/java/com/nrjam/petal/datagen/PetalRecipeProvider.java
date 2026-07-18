@@ -49,6 +49,14 @@ public class PetalRecipeProvider extends FabricRecipeProvider {
                         .requires(Items.SPORE_BLOSSOM).requires(PetalBlocks.WATER_LILY_PAD)
                         .unlockedBy(getHasName(Items.SPORE_BLOSSOM), has(Items.SPORE_BLOSSOM))
                         .save(output);
+                shapeless(RecipeCategory.DECORATIONS, PetalBlocks.BLOSSOMING_ROOT)
+                        .requires(PetalItems.END_BLOSSOM).requires(PetalBlocks.ENDER_ROOT)
+                        .unlockedBy(getHasName(PetalItems.END_BLOSSOM), has(PetalItems.END_BLOSSOM))
+                        .save(output);
+                shapeless(RecipeCategory.FOOD, PetalItems.PETAL_SALAD)
+                        .requires(Items.BOWL).requires(PetalBlocks.TURNIP_GREENS).requires(PetalItems.END_BLOSSOM)
+                        .unlockedBy(getHasName(PetalItems.END_BLOSSOM), has(PetalItems.END_BLOSSOM))
+                        .save(output);
             }
         };
     }

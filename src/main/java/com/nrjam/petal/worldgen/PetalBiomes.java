@@ -1,12 +1,15 @@
 package com.nrjam.petal.worldgen;
 
 import com.nrjam.petal.Petal;
+import com.nrjam.petal.particle.PetalParticles;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.attribute.AmbientParticle;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -33,6 +36,7 @@ public class PetalBiomes {
                 .hasPrecipitation(false)
                 .temperature(0.5F)
                 .downfall(0.5F)
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(PetalParticles.END_PETAL, 0.0003F))
                 .specialEffects(
                         new BiomeSpecialEffects.Builder()
                                 .waterColor(4159204)

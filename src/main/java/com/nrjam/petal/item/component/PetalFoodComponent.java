@@ -13,4 +13,6 @@ public class PetalFoodComponent {
 
     public static final FoodProperties FUGU = new FoodProperties.Builder().nutrition(6).saturationModifier(1f).build();
     public static final FoodProperties MOUSSE = new FoodProperties.Builder().nutrition(6).saturationModifier(.75f).build();
+
+    public static final FoodProperties PETAL_SALAD = new FoodProperties.Builder().nutrition(6).saturationModifier(.75f).build();
 }

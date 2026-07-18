@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.function.Function;
 
@@ -28,6 +29,10 @@ public class PetalItems {
             itemGroup.accept(MAGMA_BERRY);
             itemGroup.accept(FUGU);
             itemGroup.accept(MOUSSE);
+            itemGroup.accept(PETAL_SALAD);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(itemGroup -> {
+            itemGroup.accept(END_BLOSSOM);
         });
     }
 
@@ -42,6 +47,9 @@ public class PetalItems {
 
     public static final Item FUGU = register("fugu", settings -> new Item(settings.food(PetalFoodComponent.FUGU, PetalConsumableComponent.FUGU)));
     public static final Item MOUSSE = register("mousse", settings -> new Item(settings.food(PetalFoodComponent.MOUSSE)));
+
+    public static final Item END_BLOSSOM = register("end_blossom", Item::new);
+    public static final Item PETAL_SALAD = register("petal_salad", settings -> new Item(settings.food(PetalFoodComponent.PETAL_SALAD, PetalConsumableComponent.PETAL_SALAD).usingConvertsTo(Items.BOWL).stacksTo(1)));
 
     public static Item register(String name, Function<Item.Properties, Item> itemFactory) {
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Petal.MOD_ID, name));

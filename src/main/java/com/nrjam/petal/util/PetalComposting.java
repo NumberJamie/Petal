@@ -11,5 +11,6 @@ public class PetalComposting {
         CompostableRegistry.INSTANCE.add(PetalBlocks.MAGMA_BLOOM, 0.2f);
         CompostableRegistry.INSTANCE.add(PetalBlocks.DEAD_ROOTS, 0.2f);
         CompostableRegistry.INSTANCE.add(PetalBlocks.LAVA_ROOT, 0.2f);
+        CompostableRegistry.INSTANCE.add(PetalItems.END_BLOSSOM, 0.65f);
     }
 }

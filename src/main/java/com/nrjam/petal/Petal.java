@@ -2,6 +2,7 @@ package com.nrjam.petal;
 
 import com.nrjam.petal.block.PetalBlocks;
 import com.nrjam.petal.item.PetalItems;
+import com.nrjam.petal.particle.PetalParticles;
 import com.nrjam.petal.util.PetalComposting;
 import com.nrjam.petal.util.PetalLootModifiers;
 import com.nrjam.petal.worldgen.PetalWorldGeneration;
@@ -15,6 +16,7 @@ public class Petal implements ModInitializer {
 	public void onInitialize() {
 		PetalItems.initialize();
 		PetalBlocks.initialize();
+		PetalParticles.initialize();
 		PetalComposting.initialize();
 		PetalLootModifiers.initialize();
 		PetalWorldGeneration.initialize();

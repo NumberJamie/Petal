@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross_emissive",
+  "textures": {
+    "cross": "petal:block/blossoming_root",
+    "cross_emissive": "petal:block/blossoming_root_emissive"
+  }
+}

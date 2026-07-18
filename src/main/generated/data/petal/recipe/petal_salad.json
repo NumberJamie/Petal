@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:bowl",
+    "petal:turnip_greens",
+    "petal:end_blossom"
+  ],
+  "result": {
+    "id": "petal:petal_salad"
+  }
+}

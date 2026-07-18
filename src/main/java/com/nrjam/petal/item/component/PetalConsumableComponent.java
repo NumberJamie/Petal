@@ -20,4 +20,7 @@ public class PetalConsumableComponent {
             .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 100, 0), 1f))
             .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.HASTE, 100, 0), 1f))
             .build();
+    public static final Consumable PETAL_SALAD = Consumables.defaultFood()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 300, 0), 1f))
+            .build();
 }

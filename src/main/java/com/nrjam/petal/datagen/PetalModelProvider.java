@@ -69,6 +69,9 @@ public class PetalModelProvider extends FabricModelProvider {
 
         generator.generateFlatItem(PetalItems.FUGU, ModelTemplates.FLAT_ITEM);
         generator.generateFlatItem(PetalItems.MOUSSE, ModelTemplates.FLAT_ITEM);
+
+        generator.generateFlatItem(PetalItems.END_BLOSSOM, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(PetalItems.PETAL_SALAD, ModelTemplates.FLAT_ITEM);
     }
 
     private void registerLilyPadBlockState(Block block, BlockModelGenerators generator, boolean flatItemModel) {

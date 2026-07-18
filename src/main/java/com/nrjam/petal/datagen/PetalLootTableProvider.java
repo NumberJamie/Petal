@@ -63,7 +63,11 @@ public class PetalLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(PetalBlocks.WATER_LILY);
         dropSelf(PetalBlocks.END_SOIL);
         add(PetalBlocks.ENDER_ROOT, createShearsOrSilkTouchOnlyDrop(PetalBlocks.ENDER_ROOT));
-        add(PetalBlocks.BLOSSOMING_ROOT, createShearsOrSilkTouchOnlyDrop(PetalBlocks.BLOSSOMING_ROOT));
+        add(PetalBlocks.BLOSSOMING_ROOT, createSilkTouchOrShearsDispatchTable(PetalBlocks.BLOSSOMING_ROOT, applyExplosionDecay(
+                PetalBlocks.BLOSSOMING_ROOT, LootItem.lootTableItem(PetalItems.END_BLOSSOM)
+                        .when(LootItemRandomChanceCondition.randomChance(0.125f))
+                        .apply(ApplyBonusCount.addUniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 1))
+        )));
         dropOther(PetalBlocks.MUDDY_FARMLAND, Blocks.MUD);
         dropOther(PetalBlocks.NETHER_FARMLAND, Blocks.SOUL_SOIL);
         add(PetalBlocks.TURNIPS, applyExplosionDecay(PetalBlocks.TURNIPS, LootTable.lootTable()
